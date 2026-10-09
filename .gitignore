@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# NetSleuth runtime data (SQLite databases are generated, not committed)
+backend/data/
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Editors / OS
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Evaluation artefacts are intentionally NOT ignored: docs/experiments/*
+# holds the recorded results the report cites.
+
+# Agent/tool working state (session logs, run transcripts, artifact copies).
+# This is orchestration scaffolding, not part of the project deliverable.
+.zwork/

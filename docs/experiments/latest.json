@@ -1,0 +1,2376 @@
+{
+  "experiment_id": "exp-e5952536f39f",
+  "name": "NetSleuth fault suite (seed 20261009, 10 runs/scenario)",
+  "config": {
+    "runs_per_scenario": 10,
+    "seed": 20261009,
+    "template_ids": null,
+    "fault_types": [],
+    "strategies": [
+      "adaptive",
+      "baseline"
+    ],
+    "max_probes": 8,
+    "include_control": true,
+    "model_version": "netsleuth-likelihood-v1",
+    "prior_config_version": "netsleuth-priors-v1"
+  },
+  "plan": {
+    "scenarios": 22,
+    "strategies": 2,
+    "runs_per_scenario": 10,
+    "total_runs": 440
+  },
+  "completed_runs": 440,
+  "wall_clock_ms": 2528.383,
+  "generated_at": "2026-10-09T15:10:38.378216+00:00",
+  "metrics": {
+    "config": {
+      "runs_per_scenario": 10,
+      "seed": 20261009,
+      "template_ids": null,
+      "fault_types": [],
+      "strategies": [
+        "adaptive",
+        "baseline"
+      ],
+      "max_probes": 8,
+      "include_control": true,
+      "model_version": "netsleuth-likelihood-v1",
+      "prior_config_version": "netsleuth-priors-v1"
+    },
+    "run_count": 440,
+    "overall": {
+      "runs": 440,
+      "top1_correct": 376,
+      "top3_correct": 440,
+      "accepted_confusion_correct": 406,
+      "inconclusive_runs": 45,
+      "top1_accuracy": 0.8545,
+      "top3_accuracy": 1.0,
+      "accepted_confusion_adjusted_accuracy": 0.9227,
+      "coverage": 0.8977,
+      "inconclusive_rate": 0.1023,
+      "mean_probes_all": 5.6,
+      "mean_probes_conclusive": 5.3266,
+      "mean_elapsed_ms": 3.6818,
+      "localization_accuracy": 0.9864,
+      "localization_evaluated": 294
+    },
+    "by_strategy": {
+      "adaptive": {
+        "runs": 220,
+        "top1_correct": 219,
+        "top3_correct": 220,
+        "accepted_confusion_correct": 219,
+        "inconclusive_runs": 5,
+        "top1_accuracy": 0.9955,
+        "top3_accuracy": 1.0,
+        "accepted_confusion_adjusted_accuracy": 0.9955,
+        "coverage": 0.9773,
+        "inconclusive_rate": 0.0227,
+        "mean_probes_all": 4.2045,
+        "mean_probes_conclusive": 4.1163,
+        "mean_elapsed_ms": 4.9186,
+        "localization_accuracy": 0.9938,
+        "localization_evaluated": 161
+      },
+      "baseline": {
+        "runs": 220,
+        "top1_correct": 157,
+        "top3_correct": 220,
+        "accepted_confusion_correct": 187,
+        "inconclusive_runs": 40,
+        "top1_accuracy": 0.7136,
+        "top3_accuracy": 1.0,
+        "accepted_confusion_adjusted_accuracy": 0.85,
+        "coverage": 0.8182,
+        "inconclusive_rate": 0.1818,
+        "mean_probes_all": 6.9955,
+        "mean_probes_conclusive": 6.7722,
+        "mean_elapsed_ms": 2.445,
+        "localization_accuracy": 0.9774,
+        "localization_evaluated": 133
+      }
+    },
+    "by_fault_class": {
+      "APPLICATION_SERVICE_FAILURE": {
+        "all": {
+          "runs": 40,
+          "top1_correct": 40,
+          "top3_correct": 40,
+          "accepted_confusion_correct": 40,
+          "inconclusive_runs": 0,
+          "top1_accuracy": 1.0,
+          "top3_accuracy": 1.0,
+          "accepted_confusion_adjusted_accuracy": 1.0,
+          "coverage": 1.0,
+          "inconclusive_rate": 0.0,
+          "mean_probes_all": 5.0,
+          "mean_probes_conclusive": 5.0,
+          "mean_elapsed_ms": 2.6979,
+          "localization_accuracy": 1.0,
+          "localization_evaluated": 40
+        },
+        "by_strategy": {
+          "adaptive": {
+            "runs": 20,
+            "top1_correct": 20,
+            "top3_correct": 20,
+            "accepted_confusion_correct": 20,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 2.0,
+            "mean_probes_conclusive": 2.0,
+            "mean_elapsed_ms": 2.7664,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 20
+          },
+          "baseline": {
+            "runs": 20,
+            "top1_correct": 20,
+            "top3_correct": 20,
+            "accepted_confusion_correct": 20,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 8.0,
+            "mean_probes_conclusive": 8.0,
+            "mean_elapsed_ms": 2.6294,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 20
+          }
+        }
+      },
+      "DNS_FAILURE": {
+        "all": {
+          "runs": 40,
+          "top1_correct": 40,
+          "top3_correct": 40,
+          "accepted_confusion_correct": 40,
+          "inconclusive_runs": 0,
+          "top1_accuracy": 1.0,
+          "top3_accuracy": 1.0,
+          "accepted_confusion_adjusted_accuracy": 1.0,
+          "coverage": 1.0,
+          "inconclusive_rate": 0.0,
+          "mean_probes_all": 5.0,
+          "mean_probes_conclusive": 5.0,
+          "mean_elapsed_ms": 3.2969,
+          "localization_accuracy": 1.0,
+          "localization_evaluated": 40
+        },
+        "by_strategy": {
+          "adaptive": {
+            "runs": 20,
+            "top1_correct": 20,
+            "top3_correct": 20,
+            "accepted_confusion_correct": 20,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 4.0,
+            "mean_probes_conclusive": 4.0,
+            "mean_elapsed_ms": 4.6156,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 20
+          },
+          "baseline": {
+            "runs": 20,
+            "top1_correct": 20,
+            "top3_correct": 20,
+            "accepted_confusion_correct": 20,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 6.0,
+            "mean_probes_conclusive": 6.0,
+            "mean_elapsed_ms": 1.9781,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 20
+          }
+        }
+      },
+      "HIGH_LATENCY": {
+        "all": {
+          "runs": 40,
+          "top1_correct": 40,
+          "top3_correct": 40,
+          "accepted_confusion_correct": 40,
+          "inconclusive_runs": 0,
+          "top1_accuracy": 1.0,
+          "top3_accuracy": 1.0,
+          "accepted_confusion_adjusted_accuracy": 1.0,
+          "coverage": 1.0,
+          "inconclusive_rate": 0.0,
+          "mean_probes_all": 6.0,
+          "mean_probes_conclusive": 6.0,
+          "mean_elapsed_ms": 4.0631,
+          "localization_accuracy": null,
+          "localization_evaluated": 0
+        },
+        "by_strategy": {
+          "adaptive": {
+            "runs": 20,
+            "top1_correct": 20,
+            "top3_correct": 20,
+            "accepted_confusion_correct": 20,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 5.0,
+            "mean_probes_conclusive": 5.0,
+            "mean_elapsed_ms": 5.6096,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          },
+          "baseline": {
+            "runs": 20,
+            "top1_correct": 20,
+            "top3_correct": 20,
+            "accepted_confusion_correct": 20,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 7.0,
+            "mean_probes_conclusive": 7.0,
+            "mean_elapsed_ms": 2.5165,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          }
+        }
+      },
+      "LINK_FAILURE": {
+        "all": {
+          "runs": 80,
+          "top1_correct": 50,
+          "top3_correct": 80,
+          "accepted_confusion_correct": 80,
+          "inconclusive_runs": 30,
+          "top1_accuracy": 0.625,
+          "top3_accuracy": 1.0,
+          "accepted_confusion_adjusted_accuracy": 1.0,
+          "coverage": 0.625,
+          "inconclusive_rate": 0.375,
+          "mean_probes_all": 5.625,
+          "mean_probes_conclusive": 4.2,
+          "mean_elapsed_ms": 3.9687,
+          "localization_accuracy": 1.0,
+          "localization_evaluated": 80
+        },
+        "by_strategy": {
+          "adaptive": {
+            "runs": 40,
+            "top1_correct": 40,
+            "top3_correct": 40,
+            "accepted_confusion_correct": 40,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 4.5,
+            "mean_probes_conclusive": 4.5,
+            "mean_elapsed_ms": 5.4399,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 40
+          },
+          "baseline": {
+            "runs": 40,
+            "top1_correct": 10,
+            "top3_correct": 40,
+            "accepted_confusion_correct": 40,
+            "inconclusive_runs": 30,
+            "top1_accuracy": 0.25,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 0.25,
+            "inconclusive_rate": 0.75,
+            "mean_probes_all": 6.75,
+            "mean_probes_conclusive": 3.0,
+            "mean_elapsed_ms": 2.4974,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 40
+          }
+        }
+      },
+      "MTU_BLACK_HOLE": {
+        "all": {
+          "runs": 60,
+          "top1_correct": 30,
+          "top3_correct": 60,
+          "accepted_confusion_correct": 30,
+          "inconclusive_runs": 0,
+          "top1_accuracy": 0.5,
+          "top3_accuracy": 1.0,
+          "accepted_confusion_adjusted_accuracy": 0.5,
+          "coverage": 1.0,
+          "inconclusive_rate": 0.0,
+          "mean_probes_all": 5.0,
+          "mean_probes_conclusive": 5.0,
+          "mean_elapsed_ms": 3.5111,
+          "localization_accuracy": 1.0,
+          "localization_evaluated": 30
+        },
+        "by_strategy": {
+          "adaptive": {
+            "runs": 30,
+            "top1_correct": 30,
+            "top3_correct": 30,
+            "accepted_confusion_correct": 30,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 4.0,
+            "mean_probes_conclusive": 4.0,
+            "mean_elapsed_ms": 4.8691,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 30
+          },
+          "baseline": {
+            "runs": 30,
+            "top1_correct": 0,
+            "top3_correct": 30,
+            "accepted_confusion_correct": 0,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 0.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 0.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 6.0,
+            "mean_probes_conclusive": 6.0,
+            "mean_elapsed_ms": 2.153,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          }
+        }
+      },
+      "NO_FAULT_DETECTED": {
+        "all": {
+          "runs": 40,
+          "top1_correct": 40,
+          "top3_correct": 40,
+          "accepted_confusion_correct": 40,
+          "inconclusive_runs": 0,
+          "top1_accuracy": 1.0,
+          "top3_accuracy": 1.0,
+          "accepted_confusion_adjusted_accuracy": 1.0,
+          "coverage": 1.0,
+          "inconclusive_rate": 0.0,
+          "mean_probes_all": 5.0,
+          "mean_probes_conclusive": 5.0,
+          "mean_elapsed_ms": 3.4165,
+          "localization_accuracy": null,
+          "localization_evaluated": 0
+        },
+        "by_strategy": {
+          "adaptive": {
+            "runs": 20,
+            "top1_correct": 20,
+            "top3_correct": 20,
+            "accepted_confusion_correct": 20,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 4.0,
+            "mean_probes_conclusive": 4.0,
+            "mean_elapsed_ms": 4.7744,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          },
+          "baseline": {
+            "runs": 20,
+            "top1_correct": 20,
+            "top3_correct": 20,
+            "accepted_confusion_correct": 20,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 6.0,
+            "mean_probes_conclusive": 6.0,
+            "mean_elapsed_ms": 2.0586,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          }
+        }
+      },
+      "PACKET_LOSS": {
+        "all": {
+          "runs": 40,
+          "top1_correct": 36,
+          "top3_correct": 40,
+          "accepted_confusion_correct": 36,
+          "inconclusive_runs": 15,
+          "top1_accuracy": 0.9,
+          "top3_accuracy": 1.0,
+          "accepted_confusion_adjusted_accuracy": 0.9,
+          "coverage": 0.625,
+          "inconclusive_rate": 0.375,
+          "mean_probes_all": 7.1,
+          "mean_probes_conclusive": 6.56,
+          "mean_elapsed_ms": 4.6838,
+          "localization_accuracy": 0.0,
+          "localization_evaluated": 4
+        },
+        "by_strategy": {
+          "adaptive": {
+            "runs": 20,
+            "top1_correct": 19,
+            "top3_correct": 20,
+            "accepted_confusion_correct": 19,
+            "inconclusive_runs": 5,
+            "top1_accuracy": 0.95,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 0.95,
+            "coverage": 0.75,
+            "inconclusive_rate": 0.25,
+            "mean_probes_all": 6.25,
+            "mean_probes_conclusive": 5.6667,
+            "mean_elapsed_ms": 6.4185,
+            "localization_accuracy": 0.0,
+            "localization_evaluated": 1
+          },
+          "baseline": {
+            "runs": 20,
+            "top1_correct": 17,
+            "top3_correct": 20,
+            "accepted_confusion_correct": 17,
+            "inconclusive_runs": 10,
+            "top1_accuracy": 0.85,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 0.85,
+            "coverage": 0.5,
+            "inconclusive_rate": 0.5,
+            "mean_probes_all": 7.95,
+            "mean_probes_conclusive": 7.9,
+            "mean_elapsed_ms": 2.949,
+            "localization_accuracy": 0.0,
+            "localization_evaluated": 3
+          }
+        }
+      },
+      "ROUTING_FAILURE": {
+        "all": {
+          "runs": 40,
+          "top1_correct": 40,
+          "top3_correct": 40,
+          "accepted_confusion_correct": 40,
+          "inconclusive_runs": 0,
+          "top1_accuracy": 1.0,
+          "top3_accuracy": 1.0,
+          "accepted_confusion_adjusted_accuracy": 1.0,
+          "coverage": 1.0,
+          "inconclusive_rate": 0.0,
+          "mean_probes_all": 6.5,
+          "mean_probes_conclusive": 6.5,
+          "mean_elapsed_ms": 4.1923,
+          "localization_accuracy": 1.0,
+          "localization_evaluated": 40
+        },
+        "by_strategy": {
+          "adaptive": {
+            "runs": 20,
+            "top1_correct": 20,
+            "top3_correct": 20,
+            "accepted_confusion_correct": 20,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 5.0,
+            "mean_probes_conclusive": 5.0,
+            "mean_elapsed_ms": 5.7814,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 20
+          },
+          "baseline": {
+            "runs": 20,
+            "top1_correct": 20,
+            "top3_correct": 20,
+            "accepted_confusion_correct": 20,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 8.0,
+            "mean_probes_conclusive": 8.0,
+            "mean_elapsed_ms": 2.6031,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 20
+          }
+        }
+      },
+      "TCP_FILTER_OR_PORT_FAILURE": {
+        "all": {
+          "runs": 60,
+          "top1_correct": 60,
+          "top3_correct": 60,
+          "accepted_confusion_correct": 60,
+          "inconclusive_runs": 0,
+          "top1_accuracy": 1.0,
+          "top3_accuracy": 1.0,
+          "accepted_confusion_adjusted_accuracy": 1.0,
+          "coverage": 1.0,
+          "inconclusive_rate": 0.0,
+          "mean_probes_all": 5.5,
+          "mean_probes_conclusive": 5.5,
+          "mean_elapsed_ms": 3.2967,
+          "localization_accuracy": 1.0,
+          "localization_evaluated": 60
+        },
+        "by_strategy": {
+          "adaptive": {
+            "runs": 30,
+            "top1_correct": 30,
+            "top3_correct": 30,
+            "accepted_confusion_correct": 30,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 3.3333,
+            "mean_probes_conclusive": 3.3333,
+            "mean_elapsed_ms": 3.9698,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 30
+          },
+          "baseline": {
+            "runs": 30,
+            "top1_correct": 30,
+            "top3_correct": 30,
+            "accepted_confusion_correct": 30,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 7.6667,
+            "mean_probes_conclusive": 7.6667,
+            "mean_elapsed_ms": 2.6237,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 30
+          }
+        }
+      }
+    },
+    "confusion_matrix": {
+      "labels": [
+        "APPLICATION_SERVICE_FAILURE",
+        "DNS_FAILURE",
+        "HIGH_LATENCY",
+        "LINK_FAILURE",
+        "MTU_BLACK_HOLE",
+        "NO_FAULT_DETECTED",
+        "PACKET_LOSS",
+        "ROUTING_FAILURE",
+        "TCP_FILTER_OR_PORT_FAILURE"
+      ],
+      "matrix": {
+        "APPLICATION_SERVICE_FAILURE": {
+          "APPLICATION_SERVICE_FAILURE": 40,
+          "DNS_FAILURE": 0,
+          "HIGH_LATENCY": 0,
+          "LINK_FAILURE": 0,
+          "MTU_BLACK_HOLE": 0,
+          "NO_FAULT_DETECTED": 0,
+          "PACKET_LOSS": 0,
+          "ROUTING_FAILURE": 0,
+          "TCP_FILTER_OR_PORT_FAILURE": 0
+        },
+        "DNS_FAILURE": {
+          "APPLICATION_SERVICE_FAILURE": 0,
+          "DNS_FAILURE": 40,
+          "HIGH_LATENCY": 0,
+          "LINK_FAILURE": 0,
+          "MTU_BLACK_HOLE": 0,
+          "NO_FAULT_DETECTED": 0,
+          "PACKET_LOSS": 0,
+          "ROUTING_FAILURE": 0,
+          "TCP_FILTER_OR_PORT_FAILURE": 0
+        },
+        "HIGH_LATENCY": {
+          "APPLICATION_SERVICE_FAILURE": 0,
+          "DNS_FAILURE": 0,
+          "HIGH_LATENCY": 40,
+          "LINK_FAILURE": 0,
+          "MTU_BLACK_HOLE": 0,
+          "NO_FAULT_DETECTED": 0,
+          "PACKET_LOSS": 0,
+          "ROUTING_FAILURE": 0,
+          "TCP_FILTER_OR_PORT_FAILURE": 0
+        },
+        "LINK_FAILURE": {
+          "APPLICATION_SERVICE_FAILURE": 0,
+          "DNS_FAILURE": 0,
+          "HIGH_LATENCY": 0,
+          "LINK_FAILURE": 50,
+          "MTU_BLACK_HOLE": 0,
+          "NO_FAULT_DETECTED": 0,
+          "PACKET_LOSS": 0,
+          "ROUTING_FAILURE": 30,
+          "TCP_FILTER_OR_PORT_FAILURE": 0
+        },
+        "MTU_BLACK_HOLE": {
+          "APPLICATION_SERVICE_FAILURE": 0,
+          "DNS_FAILURE": 0,
+          "HIGH_LATENCY": 0,
+          "LINK_FAILURE": 0,
+          "MTU_BLACK_HOLE": 30,
+          "NO_FAULT_DETECTED": 30,
+          "PACKET_LOSS": 0,
+          "ROUTING_FAILURE": 0,
+          "TCP_FILTER_OR_PORT_FAILURE": 0
+        },
+        "NO_FAULT_DETECTED": {
+          "APPLICATION_SERVICE_FAILURE": 0,
+          "DNS_FAILURE": 0,
+          "HIGH_LATENCY": 0,
+          "LINK_FAILURE": 0,
+          "MTU_BLACK_HOLE": 0,
+          "NO_FAULT_DETECTED": 40,
+          "PACKET_LOSS": 0,
+          "ROUTING_FAILURE": 0,
+          "TCP_FILTER_OR_PORT_FAILURE": 0
+        },
+        "PACKET_LOSS": {
+          "APPLICATION_SERVICE_FAILURE": 0,
+          "DNS_FAILURE": 0,
+          "HIGH_LATENCY": 0,
+          "LINK_FAILURE": 0,
+          "MTU_BLACK_HOLE": 4,
+          "NO_FAULT_DETECTED": 0,
+          "PACKET_LOSS": 36,
+          "ROUTING_FAILURE": 0,
+          "TCP_FILTER_OR_PORT_FAILURE": 0
+        },
+        "ROUTING_FAILURE": {
+          "APPLICATION_SERVICE_FAILURE": 0,
+          "DNS_FAILURE": 0,
+          "HIGH_LATENCY": 0,
+          "LINK_FAILURE": 0,
+          "MTU_BLACK_HOLE": 0,
+          "NO_FAULT_DETECTED": 0,
+          "PACKET_LOSS": 0,
+          "ROUTING_FAILURE": 40,
+          "TCP_FILTER_OR_PORT_FAILURE": 0
+        },
+        "TCP_FILTER_OR_PORT_FAILURE": {
+          "APPLICATION_SERVICE_FAILURE": 0,
+          "DNS_FAILURE": 0,
+          "HIGH_LATENCY": 0,
+          "LINK_FAILURE": 0,
+          "MTU_BLACK_HOLE": 0,
+          "NO_FAULT_DETECTED": 0,
+          "PACKET_LOSS": 0,
+          "ROUTING_FAILURE": 0,
+          "TCP_FILTER_OR_PORT_FAILURE": 60
+        }
+      }
+    },
+    "per_scenario": [
+      {
+        "scenario_id": "campus-dns-outage",
+        "expected_hypothesis": "DNS_FAILURE",
+        "actual_fault_type": "DNS_FAILURE",
+        "template_id": "campus-basic",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 4.0,
+            "mean_probes_conclusive": 4.0,
+            "mean_elapsed_ms": 4.7843,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 6.0,
+            "mean_probes_conclusive": 6.0,
+            "mean_elapsed_ms": 1.9485,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          }
+        }
+      },
+      {
+        "scenario_id": "campus-gateway-unreachable",
+        "expected_hypothesis": "LINK_FAILURE",
+        "actual_fault_type": "GATEWAY_UNREACHABLE",
+        "template_id": "campus-basic",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 3.0,
+            "mean_probes_conclusive": 3.0,
+            "mean_elapsed_ms": 3.924,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 3.0,
+            "mean_probes_conclusive": 3.0,
+            "mean_elapsed_ms": 1.1922,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          }
+        }
+      },
+      {
+        "scenario_id": "campus-high-latency",
+        "expected_hypothesis": "HIGH_LATENCY",
+        "actual_fault_type": "HIGH_LATENCY",
+        "template_id": "campus-basic",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 5.0,
+            "mean_probes_conclusive": 5.0,
+            "mean_elapsed_ms": 5.724,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 7.0,
+            "mean_probes_conclusive": 7.0,
+            "mean_elapsed_ms": 2.5911,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          }
+        }
+      },
+      {
+        "scenario_id": "campus-link-down-far",
+        "expected_hypothesis": "LINK_FAILURE",
+        "actual_fault_type": "LINK_DOWN",
+        "template_id": "campus-basic",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 5.0,
+            "mean_probes_conclusive": 5.0,
+            "mean_elapsed_ms": 5.5387,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 0,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 10,
+            "top1_accuracy": 0.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 0.0,
+            "inconclusive_rate": 1.0,
+            "mean_probes_all": 8.0,
+            "mean_probes_conclusive": null,
+            "mean_elapsed_ms": 2.9403,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          }
+        }
+      },
+      {
+        "scenario_id": "campus-link-down-near",
+        "expected_hypothesis": "LINK_FAILURE",
+        "actual_fault_type": "LINK_DOWN",
+        "template_id": "campus-basic",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 5.0,
+            "mean_probes_conclusive": 5.0,
+            "mean_elapsed_ms": 6.0844,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 0,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 10,
+            "top1_accuracy": 0.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 0.0,
+            "inconclusive_rate": 1.0,
+            "mean_probes_all": 8.0,
+            "mean_probes_conclusive": null,
+            "mean_elapsed_ms": 2.859,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          }
+        }
+      },
+      {
+        "scenario_id": "campus-mtu-1000-db",
+        "expected_hypothesis": "MTU_BLACK_HOLE",
+        "actual_fault_type": "MTU_BLACK_HOLE",
+        "template_id": "campus-basic",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 4.0,
+            "mean_probes_conclusive": 4.0,
+            "mean_elapsed_ms": 5.0224,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 0,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 0,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 0.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 0.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 6.0,
+            "mean_probes_conclusive": 6.0,
+            "mean_elapsed_ms": 2.4089,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          }
+        }
+      },
+      {
+        "scenario_id": "campus-mtu-576",
+        "expected_hypothesis": "MTU_BLACK_HOLE",
+        "actual_fault_type": "MTU_BLACK_HOLE",
+        "template_id": "campus-basic",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 4.0,
+            "mean_probes_conclusive": 4.0,
+            "mean_elapsed_ms": 4.9319,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 0,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 0,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 0.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 0.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 6.0,
+            "mean_probes_conclusive": 6.0,
+            "mean_elapsed_ms": 2.068,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          }
+        }
+      },
+      {
+        "scenario_id": "campus-nofault-web",
+        "expected_hypothesis": "NO_FAULT_DETECTED",
+        "actual_fault_type": null,
+        "template_id": "campus-basic",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 4.0,
+            "mean_probes_conclusive": 4.0,
+            "mean_elapsed_ms": 5.0075,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 6.0,
+            "mean_probes_conclusive": 6.0,
+            "mean_elapsed_ms": 1.9682,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          }
+        }
+      },
+      {
+        "scenario_id": "campus-packet-loss-moderate",
+        "expected_hypothesis": "PACKET_LOSS",
+        "actual_fault_type": "PACKET_LOSS",
+        "template_id": "campus-basic",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 9,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 9,
+            "inconclusive_runs": 5,
+            "top1_accuracy": 0.9,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 0.9,
+            "coverage": 0.5,
+            "inconclusive_rate": 0.5,
+            "mean_probes_all": 6.7,
+            "mean_probes_conclusive": 5.4,
+            "mean_elapsed_ms": 6.6374,
+            "localization_accuracy": 0.0,
+            "localization_evaluated": 1
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 7,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 7,
+            "inconclusive_runs": 6,
+            "top1_accuracy": 0.7,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 0.7,
+            "coverage": 0.4,
+            "inconclusive_rate": 0.6,
+            "mean_probes_all": 7.9,
+            "mean_probes_conclusive": 7.75,
+            "mean_elapsed_ms": 2.7008,
+            "localization_accuracy": 0.0,
+            "localization_evaluated": 3
+          }
+        }
+      },
+      {
+        "scenario_id": "campus-packet-loss-severe",
+        "expected_hypothesis": "PACKET_LOSS",
+        "actual_fault_type": "PACKET_LOSS",
+        "template_id": "campus-basic",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 5.8,
+            "mean_probes_conclusive": 5.8,
+            "mean_elapsed_ms": 6.1997,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 4,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 0.6,
+            "inconclusive_rate": 0.4,
+            "mean_probes_all": 8.0,
+            "mean_probes_conclusive": 8.0,
+            "mean_elapsed_ms": 3.1973,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          }
+        }
+      },
+      {
+        "scenario_id": "campus-port-blocked-web",
+        "expected_hypothesis": "TCP_FILTER_OR_PORT_FAILURE",
+        "actual_fault_type": "TCP_PORT_BLOCKED",
+        "template_id": "campus-basic",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 4.0,
+            "mean_probes_conclusive": 4.0,
+            "mean_elapsed_ms": 4.7092,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 8.0,
+            "mean_probes_conclusive": 8.0,
+            "mean_elapsed_ms": 2.6241,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          }
+        }
+      },
+      {
+        "scenario_id": "campus-port-rejected-db",
+        "expected_hypothesis": "TCP_FILTER_OR_PORT_FAILURE",
+        "actual_fault_type": "TCP_PORT_REJECTED",
+        "template_id": "campus-basic",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 2.0,
+            "mean_probes_conclusive": 2.0,
+            "mean_elapsed_ms": 2.7058,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 7.0,
+            "mean_probes_conclusive": 7.0,
+            "mean_elapsed_ms": 2.528,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          }
+        }
+      },
+      {
+        "scenario_id": "campus-route-blackhole",
+        "expected_hypothesis": "ROUTING_FAILURE",
+        "actual_fault_type": "ROUTE_BLACKHOLE",
+        "template_id": "campus-basic",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 5.0,
+            "mean_probes_conclusive": 5.0,
+            "mean_elapsed_ms": 5.4239,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 8.0,
+            "mean_probes_conclusive": 8.0,
+            "mean_elapsed_ms": 2.5494,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          }
+        }
+      },
+      {
+        "scenario_id": "campus-service-down-web",
+        "expected_hypothesis": "APPLICATION_SERVICE_FAILURE",
+        "actual_fault_type": "SERVICE_DOWN",
+        "template_id": "campus-basic",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 2.0,
+            "mean_probes_conclusive": 2.0,
+            "mean_elapsed_ms": 2.6681,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 8.0,
+            "mean_probes_conclusive": 8.0,
+            "mean_elapsed_ms": 2.8009,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          }
+        }
+      },
+      {
+        "scenario_id": "multihop-dns-outage",
+        "expected_hypothesis": "DNS_FAILURE",
+        "actual_fault_type": "DNS_FAILURE",
+        "template_id": "multihop-wan",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 4.0,
+            "mean_probes_conclusive": 4.0,
+            "mean_elapsed_ms": 4.447,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 6.0,
+            "mean_probes_conclusive": 6.0,
+            "mean_elapsed_ms": 2.0076,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          }
+        }
+      },
+      {
+        "scenario_id": "multihop-latency-wan",
+        "expected_hypothesis": "HIGH_LATENCY",
+        "actual_fault_type": "HIGH_LATENCY",
+        "template_id": "multihop-wan",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 5.0,
+            "mean_probes_conclusive": 5.0,
+            "mean_elapsed_ms": 5.4953,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 7.0,
+            "mean_probes_conclusive": 7.0,
+            "mean_elapsed_ms": 2.4419,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          }
+        }
+      },
+      {
+        "scenario_id": "multihop-link-down-core-branch",
+        "expected_hypothesis": "LINK_FAILURE",
+        "actual_fault_type": "LINK_DOWN",
+        "template_id": "multihop-wan",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 5.0,
+            "mean_probes_conclusive": 5.0,
+            "mean_elapsed_ms": 6.2125,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 0,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 10,
+            "top1_accuracy": 0.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 0.0,
+            "inconclusive_rate": 1.0,
+            "mean_probes_all": 8.0,
+            "mean_probes_conclusive": null,
+            "mean_elapsed_ms": 2.9982,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          }
+        }
+      },
+      {
+        "scenario_id": "multihop-mtu-edge-core",
+        "expected_hypothesis": "MTU_BLACK_HOLE",
+        "actual_fault_type": "MTU_BLACK_HOLE",
+        "template_id": "multihop-wan",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 4.0,
+            "mean_probes_conclusive": 4.0,
+            "mean_elapsed_ms": 4.653,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 0,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 0,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 0.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 0.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 6.0,
+            "mean_probes_conclusive": 6.0,
+            "mean_elapsed_ms": 1.9822,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          }
+        }
+      },
+      {
+        "scenario_id": "multihop-nofault-api",
+        "expected_hypothesis": "NO_FAULT_DETECTED",
+        "actual_fault_type": null,
+        "template_id": "multihop-wan",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 4.0,
+            "mean_probes_conclusive": 4.0,
+            "mean_elapsed_ms": 4.5413,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 6.0,
+            "mean_probes_conclusive": 6.0,
+            "mean_elapsed_ms": 2.1489,
+            "localization_accuracy": null,
+            "localization_evaluated": 0
+          }
+        }
+      },
+      {
+        "scenario_id": "multihop-port-blocked-admin",
+        "expected_hypothesis": "TCP_FILTER_OR_PORT_FAILURE",
+        "actual_fault_type": "TCP_PORT_BLOCKED",
+        "template_id": "multihop-wan",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 4.0,
+            "mean_probes_conclusive": 4.0,
+            "mean_elapsed_ms": 4.4944,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 8.0,
+            "mean_probes_conclusive": 8.0,
+            "mean_elapsed_ms": 2.7189,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          }
+        }
+      },
+      {
+        "scenario_id": "multihop-route-blackhole",
+        "expected_hypothesis": "ROUTING_FAILURE",
+        "actual_fault_type": "ROUTE_BLACKHOLE",
+        "template_id": "multihop-wan",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 5.0,
+            "mean_probes_conclusive": 5.0,
+            "mean_elapsed_ms": 6.1389,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 8.0,
+            "mean_probes_conclusive": 8.0,
+            "mean_elapsed_ms": 2.6568,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          }
+        }
+      },
+      {
+        "scenario_id": "multihop-service-down-api",
+        "expected_hypothesis": "APPLICATION_SERVICE_FAILURE",
+        "actual_fault_type": "SERVICE_DOWN",
+        "template_id": "multihop-wan",
+        "runs": 20,
+        "seeds": [
+          20261009,
+          20261010,
+          20261011,
+          20261012,
+          20261013,
+          20261014,
+          20261015,
+          20261016,
+          20261017,
+          20261018
+        ],
+        "by_strategy": {
+          "adaptive": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 2.0,
+            "mean_probes_conclusive": 2.0,
+            "mean_elapsed_ms": 2.8648,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          },
+          "baseline": {
+            "runs": 10,
+            "top1_correct": 10,
+            "top3_correct": 10,
+            "accepted_confusion_correct": 10,
+            "inconclusive_runs": 0,
+            "top1_accuracy": 1.0,
+            "top3_accuracy": 1.0,
+            "accepted_confusion_adjusted_accuracy": 1.0,
+            "coverage": 1.0,
+            "inconclusive_rate": 0.0,
+            "mean_probes_all": 8.0,
+            "mean_probes_conclusive": 8.0,
+            "mean_elapsed_ms": 2.4579,
+            "localization_accuracy": 1.0,
+            "localization_evaluated": 10
+          }
+        }
+      }
+    ],
+    "notes": [
+      "All metrics are computed from stored experiment run records; no value is hardcoded.",
+      "Elapsed time is the measured wall-clock duration of the diagnosis computation in the simulator (SIMULATED LAB). It is not network latency; modelled RTTs are recorded per observation inside each run.",
+      "A run is 'inconclusive' when the stopping rule was not satisfied (ambiguous belief, no informative probe left, or probe budget reached).",
+      "'accepted_confusion_adjusted' counts top-1 hits plus the documented, protocol-justified confusions; it never replaces the strict top-1 rate."
+    ]
+  },
+  "variation": {
+    "campus-dns-outage|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "DNS_FAILURE": 10
+      },
+      "probe_counts": {
+        "4": 10
+      }
+    },
+    "campus-dns-outage|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "DNS_FAILURE": 10
+      },
+      "probe_counts": {
+        "6": 10
+      }
+    },
+    "campus-gateway-unreachable|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "LINK_FAILURE": 10
+      },
+      "probe_counts": {
+        "3": 10
+      }
+    },
+    "campus-gateway-unreachable|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "LINK_FAILURE": 10
+      },
+      "probe_counts": {
+        "3": 10
+      }
+    },
+    "campus-high-latency|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "HIGH_LATENCY": 10
+      },
+      "probe_counts": {
+        "5": 10
+      }
+    },
+    "campus-high-latency|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "HIGH_LATENCY": 10
+      },
+      "probe_counts": {
+        "7": 10
+      }
+    },
+    "campus-link-down-far|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "LINK_FAILURE": 10
+      },
+      "probe_counts": {
+        "5": 10
+      }
+    },
+    "campus-link-down-far|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "ROUTING_FAILURE": 10
+      },
+      "probe_counts": {
+        "8": 10
+      }
+    },
+    "campus-link-down-near|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "LINK_FAILURE": 10
+      },
+      "probe_counts": {
+        "5": 10
+      }
+    },
+    "campus-link-down-near|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "ROUTING_FAILURE": 10
+      },
+      "probe_counts": {
+        "8": 10
+      }
+    },
+    "campus-mtu-1000-db|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "MTU_BLACK_HOLE": 10
+      },
+      "probe_counts": {
+        "4": 10
+      }
+    },
+    "campus-mtu-1000-db|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "NO_FAULT_DETECTED": 10
+      },
+      "probe_counts": {
+        "6": 10
+      }
+    },
+    "campus-mtu-576|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "MTU_BLACK_HOLE": 10
+      },
+      "probe_counts": {
+        "4": 10
+      }
+    },
+    "campus-mtu-576|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "NO_FAULT_DETECTED": 10
+      },
+      "probe_counts": {
+        "6": 10
+      }
+    },
+    "campus-nofault-web|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "NO_FAULT_DETECTED": 10
+      },
+      "probe_counts": {
+        "4": 10
+      }
+    },
+    "campus-nofault-web|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "NO_FAULT_DETECTED": 10
+      },
+      "probe_counts": {
+        "6": 10
+      }
+    },
+    "campus-packet-loss-moderate|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 2,
+      "prediction_counts": {
+        "PACKET_LOSS": 9,
+        "MTU_BLACK_HOLE": 1
+      },
+      "probe_counts": {
+        "5": 3,
+        "6": 2,
+        "8": 5
+      }
+    },
+    "campus-packet-loss-moderate|baseline": {
+      "runs": 10,
+      "distinct_predictions": 2,
+      "prediction_counts": {
+        "PACKET_LOSS": 7,
+        "MTU_BLACK_HOLE": 3
+      },
+      "probe_counts": {
+        "7": 1,
+        "8": 9
+      }
+    },
+    "campus-packet-loss-severe|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "PACKET_LOSS": 10
+      },
+      "probe_counts": {
+        "5": 2,
+        "6": 8
+      }
+    },
+    "campus-packet-loss-severe|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "PACKET_LOSS": 10
+      },
+      "probe_counts": {
+        "8": 10
+      }
+    },
+    "campus-port-blocked-web|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "TCP_FILTER_OR_PORT_FAILURE": 10
+      },
+      "probe_counts": {
+        "4": 10
+      }
+    },
+    "campus-port-blocked-web|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "TCP_FILTER_OR_PORT_FAILURE": 10
+      },
+      "probe_counts": {
+        "8": 10
+      }
+    },
+    "campus-port-rejected-db|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "TCP_FILTER_OR_PORT_FAILURE": 10
+      },
+      "probe_counts": {
+        "2": 10
+      }
+    },
+    "campus-port-rejected-db|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "TCP_FILTER_OR_PORT_FAILURE": 10
+      },
+      "probe_counts": {
+        "7": 10
+      }
+    },
+    "campus-route-blackhole|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "ROUTING_FAILURE": 10
+      },
+      "probe_counts": {
+        "5": 10
+      }
+    },
+    "campus-route-blackhole|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "ROUTING_FAILURE": 10
+      },
+      "probe_counts": {
+        "8": 10
+      }
+    },
+    "campus-service-down-web|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "APPLICATION_SERVICE_FAILURE": 10
+      },
+      "probe_counts": {
+        "2": 10
+      }
+    },
+    "campus-service-down-web|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "APPLICATION_SERVICE_FAILURE": 10
+      },
+      "probe_counts": {
+        "8": 10
+      }
+    },
+    "multihop-dns-outage|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "DNS_FAILURE": 10
+      },
+      "probe_counts": {
+        "4": 10
+      }
+    },
+    "multihop-dns-outage|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "DNS_FAILURE": 10
+      },
+      "probe_counts": {
+        "6": 10
+      }
+    },
+    "multihop-latency-wan|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "HIGH_LATENCY": 10
+      },
+      "probe_counts": {
+        "5": 10
+      }
+    },
+    "multihop-latency-wan|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "HIGH_LATENCY": 10
+      },
+      "probe_counts": {
+        "7": 10
+      }
+    },
+    "multihop-link-down-core-branch|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "LINK_FAILURE": 10
+      },
+      "probe_counts": {
+        "5": 10
+      }
+    },
+    "multihop-link-down-core-branch|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "ROUTING_FAILURE": 10
+      },
+      "probe_counts": {
+        "8": 10
+      }
+    },
+    "multihop-mtu-edge-core|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "MTU_BLACK_HOLE": 10
+      },
+      "probe_counts": {
+        "4": 10
+      }
+    },
+    "multihop-mtu-edge-core|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "NO_FAULT_DETECTED": 10
+      },
+      "probe_counts": {
+        "6": 10
+      }
+    },
+    "multihop-nofault-api|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "NO_FAULT_DETECTED": 10
+      },
+      "probe_counts": {
+        "4": 10
+      }
+    },
+    "multihop-nofault-api|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "NO_FAULT_DETECTED": 10
+      },
+      "probe_counts": {
+        "6": 10
+      }
+    },
+    "multihop-port-blocked-admin|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "TCP_FILTER_OR_PORT_FAILURE": 10
+      },
+      "probe_counts": {
+        "4": 10
+      }
+    },
+    "multihop-port-blocked-admin|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "TCP_FILTER_OR_PORT_FAILURE": 10
+      },
+      "probe_counts": {
+        "8": 10
+      }
+    },
+    "multihop-route-blackhole|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "ROUTING_FAILURE": 10
+      },
+      "probe_counts": {
+        "5": 10
+      }
+    },
+    "multihop-route-blackhole|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "ROUTING_FAILURE": 10
+      },
+      "probe_counts": {
+        "8": 10
+      }
+    },
+    "multihop-service-down-api|adaptive": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "APPLICATION_SERVICE_FAILURE": 10
+      },
+      "probe_counts": {
+        "2": 10
+      }
+    },
+    "multihop-service-down-api|baseline": {
+      "runs": 10,
+      "distinct_predictions": 1,
+      "prediction_counts": {
+        "APPLICATION_SERVICE_FAILURE": 10
+      },
+      "probe_counts": {
+        "8": 10
+      }
+    }
+  },
+  "database": "/home/chetan/NetSleuth/docs/experiments/evaluation-20261009-151035.sqlite3",
+  "python_wall_clock_s": 2.533
+}
