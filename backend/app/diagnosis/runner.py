@@ -72,7 +72,9 @@ class ProbeStep:
             "mode": self.observation.mode,
             "outcome": self.observation.outcome,
             "summary": self.observation.summary,
-            "details": self.observation.details,
+            # A copy: the persistence layer adds source/destination ids to this dict, and
+            # returning the observation's own dict by reference wrote back into it.
+            "details": dict(self.observation.details),
             "evidence": [item.model_dump(mode="json") for item in self.observation.evidence],
             "selected_reason": self.selected_reason,
             "planned_information_gain_bits": (
@@ -204,7 +206,9 @@ class DiagnosisRun:
             )
         if self._baseline_plan is None:
             self._baseline_plan = build_baseline_plan(context)
-        return select_baseline_probe(self._baseline_plan, self.executed_probe_keys())
+        return select_baseline_probe(
+            self._baseline_plan, self.executed_probe_keys(), self.belief
+        )
 
     def _evaluate(self, next_choice: ProbeChoice | None) -> None:
         decision = evaluate_stopping_rule(

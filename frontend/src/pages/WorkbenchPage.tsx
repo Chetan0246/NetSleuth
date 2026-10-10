@@ -47,11 +47,10 @@ export default function WorkbenchPage() {
 
   const catalogue = useAsync(() => api.catalogue(), []);
 
-  // Re-default every selection when the SESSION changes, keyed on the id rather than
-  // the object identity. The previous version kept any existing value
-  // (`current || hosts[0]?.id`), so after switching sessions the page held ids that do
-  // not exist in the new topology: the <select> matched no option and the POST was
-  // rejected with a 422 for an unknown source/destination node.
+  // Re-default every selection when a *different* session is loaded. Keyed on the id
+  // only: keying on the whole `session` object re-ran this on every fault mutation and
+  // silently cleared the user's choices. A different session also invalidates the
+  // previous comparison snapshot.
   useEffect(() => {
     if (!session) return;
     const hosts = session.topology.nodes.filter((node) => node.type === "host");
@@ -61,7 +60,8 @@ export default function WorkbenchPage() {
     setService(servers[0]?.services[0]?.name ?? "");
     // A different session invalidates the previous comparison snapshot too.
     setBaseline(null);
-  }, [session, session?.id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session?.id]);
 
   async function guard(action: () => Promise<void>) {
     setBusy(true);
@@ -215,11 +215,16 @@ export default function WorkbenchPage() {
                   disabled={busy || (diagnosis !== null && !isTerminal)}
                   className="mt-1 w-full rounded border border-slate-300 px-2 py-1.5 text-sm disabled:bg-slate-100"
                 >
-                  {session.topology.nodes.map((node) => (
-                    <option key={node.id} value={node.id} disabled={node.id === source}>
-                      {node.name} ({node.ip_address})
-                    </option>
-                  ))}
+                  {/* Only nodes that expose a service can be a diagnosis destination:
+                      the backend rejects a destination with no service unless an
+                      explicit port is given, and this form never sends one. */}
+                  {session.topology.nodes
+                    .filter((node) => node.services.length > 0)
+                    .map((node) => (
+                      <option key={node.id} value={node.id} disabled={node.id === source}>
+                        {node.name} ({node.ip_address})
+                      </option>
+                    ))}
                 </select>
               </label>
 

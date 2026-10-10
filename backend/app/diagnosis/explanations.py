@@ -242,15 +242,14 @@ def _evidence_split(
             f"hypothesis ({leader_code.value}); it leads on the balance of evidence rather than "
             "on a positive observation."
         )
-    top_alternatives = [
-        code.value
-        for code in (Hypothesis.LINK_FAILURE, Hypothesis.ROUTING_FAILURE)
-        if code is not leader_code
-    ]
-    if leader_code is not Hypothesis.NO_FAULT_DETECTED and any(
+    # A forwarding-layer block is explained by the two forwarding hypotheses, so the
+    # warning is only meaningful when the leader is something else. The previous guard
+    # compared the leader against a list that always excluded it, so it was always true
+    # and the warning fired even for a LINK_FAILURE leader.
+    if leader_code not in (Hypothesis.LINK_FAILURE, Hypothesis.ROUTING_FAILURE) and any(
         observation.details.get("block_reason") not in (None, "NONE")
         for observation in observations
-    ) and leader_code.value not in top_alternatives:
+    ):
         unexplained.append(
             "A forwarding-layer block was reported at some point in the run, which the leading "
             "hypothesis does not explain; keep a forwarding fault among the alternatives."
@@ -305,13 +304,16 @@ def _headline(
     ranked: list[dict[str, Any]],
 ) -> tuple[str, str]:
     runner = ranked[1] if len(ranked) > 1 else None
+    # One decimal place, never `:.0%`: a posterior of 0.999 would render as the literal
+    # "100%", which validate_explanation rejects as proof language and would crash the
+    # report instead of just rounding.
     if status == "confident":
         return (
-            f"Most likely cause: {leader_code.value} ({probability:.0%} confidence)",
+            f"Most likely cause: {leader_code.value} ({probability:.1%} confidence)",
             (
                 f"The leading hypothesis is separated from the next candidate"
                 + (
-                    f" ({runner['code']} at {float(runner['probability']):.0%})"
+                    f" ({runner['code']} at {float(runner['probability']):.1%})"
                     if runner
                     else ""
                 )
@@ -322,7 +324,7 @@ def _headline(
     if status == "budget_exhausted":
         return (
             f"Unresolved (probe budget exhausted); best candidate "
-            f"{leader_code.value} at {probability:.0%}",
+            f"{leader_code.value} at {probability:.1%}",
             (
                 "The probe budget ran out before the confidence threshold was met. Treat the "
                 "leading candidate as a hypothesis to verify, not as a confirmed cause."
@@ -334,7 +336,7 @@ def _headline(
             "The run could not continue, so no conclusion is reported for the collected evidence.",
         )
     return (
-        f"Inconclusive: {leader_code.value} leads at {probability:.0%} but is not separated",
+        f"Inconclusive: {leader_code.value} leads at {probability:.1%} but is not separated",
         (
             "More than one explanation remains plausible under the current evidence, so the "
             "engine reports the ambiguity instead of forcing a single answer."

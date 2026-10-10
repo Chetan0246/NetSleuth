@@ -219,10 +219,56 @@ silently ignored the score. It and the unused `repeatable` field were removed. A
 removed: an unreachable branch in the diagnosis service, a dead compatibility stub in
 `app/main.py`, a bogus `__all__` export, and 45 unused imports.
 
-### What the audit did **not** change
+### What the first audit did **not** change
 
-The evaluation results are unchanged after every fix: 440 runs, adaptive top-1 **99.6%**
-at **4.20** probes versus baseline **71.4%** at **7.00**. That is the expected outcome
-for fixes that close gaps in *unreachable or invalid* inputs and remove dead code,
-rather than altering the likelihood model or the planner — and it is the reason the
-recorded numbers in `experiment-methodology.md` still stand.
+The evaluation results were unchanged by the fixes above: 440 runs, adaptive top-1
+**99.6%** at **4.20** probes versus baseline **71.4%** at **7.00**. That is the expected
+outcome for fixes that close gaps in *unreachable or invalid* inputs and remove dead
+code, rather than altering the likelihood model or the planner. A later audit did change
+the recorded results — see §9.
+
+---
+
+## 9. Defects found and fixed by the second audit
+
+A second deep audit was run over the finished implementation. Unlike the first, two of
+its fixes change the **recorded experiment results**, so `docs/experiment-methodology.md`
+and the artefacts in `docs/experiments/` were regenerated from the corrected engine.
+
+The backend fixes each have a regression test in
+`backend/tests/unit/test_audit_regressions.py` (78 tests), so the defect cannot silently
+return. The frontend fixes are verified by `npm run typecheck` and the existing UI suite;
+they do not add dedicated frontend regression tests.
+
+### Correctness (metric-changing)
+
+| Defect | Impact before the fix | Fix |
+|---|---|---|
+| Experiment localization **dropped runs that returned no component** | The metric divided correct localizations by only the runs that returned a component, so a run that ended inconclusive — or that named no component at all — was excluded instead of counted as a miss. Reported localization was 99.4% (adaptive) / 97.7% (baseline); recomputed honestly it is **80.0% / 65.0%** over all 200 component-scoped runs per strategy. | Every scenario that declares an expected component is always evaluated; a no-component or inconclusive result is a miss. |
+| The baseline's **stopping rule consumed a placeholder information gain** | `select_baseline_probe` filled each candidate's EIG in from a uniform belief instead of the run's posterior, so the shared stopping rule stopped the baseline on a quantity the belief did not support. Baseline coverage moved from 81.8% to **71.8%** and mean probes from 7.00 to **6.80** once corrected. | The real belief is passed through; a uniform reference is used only when no belief is supplied. |
+
+### Correctness (behaviour-preserving)
+
+| Defect | Impact before the fix | Fix |
+|---|---|---|
+| `GATEWAY_UNREACHABLE` accepted **any link** as its target | The fault could be injected on a link that is no host's default gateway, producing a scenario whose label the topology cannot support. | Validated at injection: the target must be some host's default-gateway link. |
+| An MTU **exactly equal to the largest probed size** was accepted | Residual of the first audit's fix, which used `>` instead of `>=`: the ladder found every size "fitting" and returned `FULL_PATH_OK` with the fault active. | Bounded with `>=`; a test asserts an MTU at the top of the ladder is rejected. |
+| `tcp_probe` reported a **handshake RTT for a dropped SYN** | A `TIMEOUT_DROP` observation carried `handshake_rtt_ms` as if a handshake had completed, contradicting its own outcome. | The RTT is suppressed when the SYN is dropped. |
+| Persisted probe **details were aliased**, not copied | The persistence layer wrote `source_node_id`/`destination_node_id` into the same dict the observation held, so exporting a run mutated the in-memory observation. | `ProbeStep.to_public` returns a copy of the details mapping. |
+| The explanation generator's **"unexplained evidence" guard was always true** | Every non-forwarding diagnosis printed a "forwarding-layer block" warning even when the evidence contained none. | The guard checks the leader hypothesis before warning. |
+| `_headline` formatted percentages with `:.0%` | A posterior of exactly 1.0 rendered as `"100%"`, which the forbidden-word guard rejects — a latent crash on a confident conclusion. | Formatted with `:.1%`. |
+| Deleting a session left its **in-memory runs** behind | `DELETE /lab/sessions/{id}` removed the stored rows but `DiagnosisService` kept the live runs, so `get` kept serving a deleted diagnosis from memory. | `forget_session` purges matching runs; the route calls it. |
+
+### Frontend and API contract
+
+| Defect | Impact before the fix | Fix |
+|---|---|---|
+| Route-blackhole fault options **collided in the `<select>`** | Two faults on the same link rendered one `<option>`; selecting the second re-selected the first. | Options keyed by fault type + target + parameters. |
+| Session-reset effects depended on **unstable objects** | Re-running on every render reset the user's selections mid-interaction. | Deps narrowed to `session?.id`. |
+| The Workbench destination dropdown offered **nodes with no services** | Selecting one produced a request the lab cannot serve. | Filtered to nodes that declare services. |
+| An **empty template selection** silently ran every template | "None selected" was treated as "all". | Legend states "none selected = all". |
+| The **active-fault count** counted inactive faults | The heading overstated the injected faults. | Filtered by `is_active`. |
+| `api.ts` **clobbered caller headers** | A caller-supplied header was overwritten by the JSON content-type. | Caller headers are spread last. |
+| `getExperiment` was typed as the list item, not the detail | The detail page read fields the type did not declare. | Added `ExperimentDetail`. |
+| `Overview` `openSession` had **no error handling or busy guard** | A failed open was silent and the button could be double-clicked. | try/catch/finally, disabled while opening, error notice with retry. |
+

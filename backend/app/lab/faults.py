@@ -1,4 +1,4 @@
-"""Fault injection model — nine reversible, structured fault scenarios.
+"""Fault injection model — ten reversible, structured fault scenarios.
 
 Each fault is a pydantic object with a unique id, a type, a target component,
 typed parameters, an active flag and a human-readable description. Applying a
@@ -242,6 +242,25 @@ def validate_fault(spec: FaultSpec, topology: Topology) -> None:
 
     params = spec.parameters or {}
 
+    if spec.fault_type is FaultType.GATEWAY_UNREACHABLE:
+        # A gateway-unreachable fault is *defined* by the link being a host's
+        # default-gateway link. Without this check it accepted any link id and then
+        # behaved exactly like LINK_DOWN, so the two faults were indistinguishable and
+        # the stored fault description was wrong.
+        link = topology.link(spec.target_id)
+        is_gateway_link = any(
+            host.gateway is not None
+            and host.gateway in link.endpoints()
+            and host.id in link.endpoints()
+            for host in topology.hosts()
+        )
+        if not is_gateway_link:
+            raise FaultInjectionError(
+                f"GATEWAY_UNREACHABLE must target a host's default-gateway link; "
+                f"{spec.target_id} is not one",
+                field="target_id",
+            )
+
     if spec.fault_type is FaultType.ROUTE_BLACKHOLE:
         destination = params.get("destination_node_id")
         if not destination:
@@ -307,12 +326,12 @@ def validate_fault(spec: FaultSpec, topology: Topology) -> None:
             )
         # A constrained MTU at or above every probed size can never manifest: the
         # packet-size ladder would find every size "fitting" and report
-        # FULL_PATH_OK while the fault is active. Bounding it to the largest probed
-        # size keeps "injected fault" and "observable effect" equivalent.
-        if mtu > MTU_LADDER_MAX:
+        # FULL_PATH_OK while the fault is active. The largest probed size is 1500, so
+        # an MTU of exactly 1500 is already unobservable — the bound is exclusive.
+        if mtu >= MTU_LADDER_MAX:
             raise FaultInjectionError(
-                f"mtu_bytes must be at most {MTU_LADDER_MAX} (the largest probed packet "
-                "size); a higher value could never affect the packet-size ladder",
+                f"mtu_bytes must be below {MTU_LADDER_MAX} (the largest probed packet "
+                "size); a value at or above it could never affect the packet-size ladder",
                 field="parameters.mtu_bytes",
             )
 

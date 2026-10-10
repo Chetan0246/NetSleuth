@@ -11,7 +11,11 @@ import json
 
 import pytest
 
-from app.core.errors import ConflictError
+from app.core.errors import ConflictError, NotFoundError
+from app.diagnosis.baseline import build_baseline_plan, select_baseline_probe
+from app.diagnosis.bayes import BeliefState
+from app.diagnosis.hypotheses import DEFAULT_PRIORS, Hypothesis
+from app.diagnosis.planner import DiagnosisContext
 from app.diagnosis.runner import DiagnosisRun, fault_signature, run_diagnosis
 from app.lab.faults import (
     FaultConfig,
@@ -739,13 +743,28 @@ class TestFaultParameterValidation:
 
         topology = get_template("campus-basic")
         for size in MTU_PROBE_SIZES:
-            if size < 68:
+            if size < 68 or size >= max(MTU_PROBE_SIZES):
+                # Below the IPv4 minimum, or at the largest probed size: an MTU equal to
+                # the largest probed size can never make any probed packet oversized.
                 continue
             spec = FaultSpec(
                 fault_type=FaultType.MTU_BLACK_HOLE,
                 target_id="l-access-campus",
                 parameters={"mtu_bytes": size},
             )
+            validate_fault(spec, topology)
+
+    def test_mtu_equal_to_the_largest_probed_size_is_rejected(self) -> None:
+        """Regression: mtu_bytes == 1500 was accepted but could never manifest."""
+        from app.core.config import MTU_PROBE_SIZES
+
+        topology = get_template("campus-basic")
+        spec = FaultSpec(
+            fault_type=FaultType.MTU_BLACK_HOLE,
+            target_id="l-access-campus",
+            parameters={"mtu_bytes": max(MTU_PROBE_SIZES)},
+        )
+        with pytest.raises(FaultInjectionError, match="below"):
             validate_fault(spec, topology)
 
     def test_an_accepted_mtu_fault_actually_manifests(self) -> None:
@@ -865,6 +884,7 @@ class TestLocalizationScoringIsExact:
     def test_localization_accuracy_is_measured_end_to_end(self) -> None:
         """A real run must localize its own scenario correctly under exact matching."""
         from app.experiments.runner import ExperimentConfig, run_experiment
+        from app.experiments.scenarios import SCENARIOS
 
         summary = run_experiment(
             Database(":memory:"),
@@ -875,12 +895,49 @@ class TestLocalizationScoringIsExact:
             ),
         )
         adaptive = summary["metrics"]["by_strategy"]["adaptive"]
-        assert adaptive["localization_evaluated"] > 0
-        assert adaptive["localization_accuracy"] is not None
-        assert adaptive["localization_accuracy"] >= 0.9, (
-            "exact component matching should still localize the suite; a drop here means "
-            "the localizer form and the scenario form disagree"
+        expected_component_runs = sum(
+            1
+            for scenario in SCENARIOS
+            if scenario.template_id == "campus-basic" and scenario.expected_component_id
         )
+        # Every scenario that declares an expected component must be counted, even when
+        # the localizer names no component: that is a miss, not an ineligible run.
+        assert adaptive["localization_evaluated"] == expected_component_runs, (
+            "runs whose localizer found no component must stay in the denominator"
+        )
+        assert adaptive["localization_accuracy"] is not None
+        assert adaptive["localization_accuracy"] >= 0.7, (
+            "the localizer must still resolve the faults it can actually localize; a drop "
+            "below this means the localizer form and the scenario form disagree"
+        )
+
+    def test_a_scenario_with_no_localized_component_counts_as_a_miss(self) -> None:
+        """Regression: a no-component result must not be excluded from the metric."""
+        from app.experiments.runner import ExperimentConfig, run_experiment
+        from app.lab.faults import FaultType
+
+        # Packet loss is declared with an expected link but the localizer deliberately
+        # cannot attribute loss to one link from end-to-end probes, so it returns None.
+        database = Database(":memory:")
+        summary = run_experiment(
+            database,
+            ExperimentConfig(
+                runs_per_scenario=1,
+                template_ids=["campus-basic"],
+                fault_types=[FaultType.PACKET_LOSS],
+                strategies=["adaptive"],
+            ),
+        )
+        runs = database.list_experiment_runs(summary["experiment_id"])
+        packet_loss_runs = [
+            run for run in runs if run["scenario_id"].startswith("campus-packet-loss")
+        ]
+        assert packet_loss_runs, "the packet-loss scenario must have executed"
+        for run in packet_loss_runs:
+            assert run["localized_target_id"] is None
+            assert run["is_localization_correct"] == 0, (
+                "a declared expected component with no localized component is a miss"
+            )
 
 
 class TestNoDeadCode:
@@ -1033,3 +1090,219 @@ class TestOverviewDiagnosisPayload:
         body = client.get(f"{API_PREFIX}/overview").json()
         assert body["recent_diagnoses"] == []
         assert body["stats"]["diagnoses"] == 0
+
+
+class TestExplanationNeverRenders100Percent:
+    """Bug: a posterior of 0.999 rendered as the literal "100%" via ``:.0%``, which
+    ``validate_explanation`` rejects as proof language, so ``to_public`` raised an
+    ``AssertionError`` and the report endpoint returned a 500."""
+
+    def _observation(self):
+        from app.probes.base import ProbeObservation
+        from app.probes.simulated import ProbeType
+
+        return ProbeObservation(
+            probe_key="MTU_PROBE",
+            probe_type=ProbeType.MTU_PROBE,
+            probe_label="Simulated MTU / packet-size ladder",
+            source_node_id="client-1",
+            destination_node_id="web-1",
+            outcome="LIMITED_DROP",
+            summary="limited",
+            details={},
+        )
+
+    def test_a_near_certain_posterior_still_renders(self) -> None:
+        from app.diagnosis.explanations import build_explanation
+
+        belief = {
+            "ranked": [
+                {"code": "MTU_BLACK_HOLE", "title": "Path-MTU black hole",
+                 "probability": 0.999, "prior": 0.1, "layers": ["L3"]},
+                {"code": "PACKET_LOSS", "title": "Packet loss",
+                 "probability": 0.001, "prior": 0.1, "layers": ["L3"]},
+            ],
+            "entropy_bits": 0.01,
+        }
+        explanation = build_explanation(
+            status="confident",
+            observations=[self._observation()],
+            belief=belief,
+            contributions=[],
+            stopping_reason="reached the threshold",
+            next_probe=None,
+            suspected_component=None,
+        )
+        assert "100%" not in explanation.headline
+        assert "99.9%" in explanation.headline
+
+
+class TestUnexplainedEvidenceGuard:
+    """Bug: the forwarding-block warning compared the leader against a list that always
+    excluded it, so it fired even for a LINK_FAILURE/ROUTING_FAILURE leader."""
+
+    def _observation(self):
+        from app.probes.base import ProbeObservation
+        from app.probes.simulated import ProbeType
+
+        return ProbeObservation(
+            probe_key="TCP_CONNECT",
+            probe_type=ProbeType.TCP_CONNECT,
+            probe_label="Simulated TCP connect",
+            source_node_id="client-1",
+            destination_node_id="web-1",
+            outcome="UNREACHABLE",
+            summary="no route",
+            details={"block_reason": "NO_ROUTE"},
+        )
+
+    def test_forwarding_leaders_are_not_warned_about_a_forwarding_block(self) -> None:
+        from app.diagnosis.explanations import _evidence_split
+        from app.diagnosis.hypotheses import Hypothesis
+
+        for leader in (Hypothesis.LINK_FAILURE, Hypothesis.ROUTING_FAILURE):
+            _, _, unexplained = _evidence_split(leader, [], [self._observation()])
+            assert not any("forwarding-layer block" in item for item in unexplained), (
+                f"{leader.value} explains the forwarding block and must not be warned about it"
+            )
+
+    def test_a_non_forwarding_leader_is_warned(self) -> None:
+        from app.diagnosis.explanations import _evidence_split
+        from app.diagnosis.hypotheses import Hypothesis
+
+        _, _, unexplained = _evidence_split(
+            Hypothesis.DNS_FAILURE, [], [self._observation()]
+        )
+        assert any("forwarding-layer block" in item for item in unexplained), (
+            "a DNS leader does not explain a forwarding block"
+        )
+
+
+class TestDroppedSynHasNoHandshakeRtt:
+    """Bug: a silently dropped SYN reported a handshake RTT, and the probe then used it
+    as the modelled elapsed time instead of the connect timeout."""
+
+    def test_tcp_drop_reports_no_handshake_rtt(self) -> None:
+        lab = _lab_with(FaultType.TCP_PORT_BLOCKED, "web-1:web")
+        state = LabSimulator(lab).tcp_probe("client-1", "web-1", 80, "t")
+        assert state.outcome is TcpOutcome.TIMEOUT_DROP
+        assert state.handshake_rtt_ms is None
+
+
+class TestGatewayUnreachableTargetsAGatewayLink:
+    """Bug: GATEWAY_UNREACHABLE accepted any link id and silently behaved like LINK_DOWN."""
+
+    def test_a_non_gateway_link_is_rejected(self) -> None:
+        topology = get_template("campus-basic")
+        spec = FaultSpec(
+            fault_type=FaultType.GATEWAY_UNREACHABLE,
+            target_id="l-campus-edge",  # a core uplink, not a host's gateway link
+        )
+        with pytest.raises(FaultInjectionError, match="default-gateway link"):
+            validate_fault(spec, topology)
+
+    def test_a_real_gateway_link_is_accepted(self) -> None:
+        topology = get_template("campus-basic")
+        spec = FaultSpec(
+            fault_type=FaultType.GATEWAY_UNREACHABLE, target_id="l-client1-access"
+        )
+        validate_fault(spec, topology)
+
+
+class TestPersistedObservationDetailsAreNotAliased:
+    """Bug: ProbeStep.to_public returned the observation's details dict by reference, so
+    the persistence layer's setdefault mutated the in-memory observation."""
+
+    def test_persisting_does_not_mutate_the_observation_details(self) -> None:
+        database = Database(":memory:")
+        sessions = SessionService(database)
+        diagnoses = DiagnosisService(database, sessions)
+        session_id = sessions.create_session("campus-basic")["id"]
+        run = diagnoses.create(
+            session_id=session_id,
+            source_node_id="client-1",
+            destination_node_id="web-1",
+            destination_service="web",
+            run_to_completion=True,
+        )
+        for step in run.steps:
+            assert "source_node_id" not in step.observation.details, (
+                "persistence must not write back into the observation it is storing"
+            )
+
+
+class TestDeletedSessionRunsAreForgotten:
+    """Bug: deleting a session cascaded the stored rows but left the live
+    ``DiagnosisRun`` objects in ``DiagnosisService._runs``, so ``get`` kept serving a
+    deleted session's diagnosis straight from memory."""
+
+    def test_deleting_a_session_forgets_its_in_memory_runs(self) -> None:
+        database = Database(":memory:")
+        sessions = SessionService(database)
+        diagnoses = DiagnosisService(database, sessions)
+        session_id = sessions.create_session("campus-basic")["id"]
+        other_id = sessions.create_session("campus-basic")["id"]
+
+        doomed = diagnoses.create(
+            session_id=session_id,
+            source_node_id="client-1",
+            destination_node_id="web-1",
+            destination_service="web",
+            run_to_completion=True,
+        )
+        kept = diagnoses.create(
+            session_id=other_id,
+            source_node_id="client-1",
+            destination_node_id="web-1",
+            destination_service="web",
+            run_to_completion=True,
+        )
+
+        # The stored rows cascade on delete; the live run objects do not.
+        assert database.delete_session(session_id) is True
+        assert diagnoses.get(doomed.diagnosis_id) is doomed, (
+            "the leak: the deleted run is still reachable from memory"
+        )
+
+        diagnoses.forget_session(session_id)
+        with pytest.raises(NotFoundError):
+            diagnoses.get(doomed.diagnosis_id)
+        # A different session's run must be untouched.
+        assert diagnoses.get(kept.diagnosis_id) is kept
+
+
+class TestBaselineProbeReportsTheLiveInformationGain:
+    """Bug: ``select_baseline_probe`` filled in each candidate's EIG from a uniform
+    belief instead of the run's posterior, so the shared stopping rule stopped the
+    baseline on a quantity the belief did not support."""
+
+    def _context(self) -> DiagnosisContext:
+        return DiagnosisContext(
+            source_node_id="client-1",
+            destination_node_id="web-1",
+            destination_service="web",
+            port=80,
+            hostname="web.campus.test",
+            gateway_node_id="access-rtr",
+            resolver_node_id="dns-1",
+            control_node_id="db-1",
+            topology=get_template("campus-basic"),
+        )
+
+    def test_reported_eig_uses_the_supplied_belief(self) -> None:
+        plan = build_baseline_plan(self._context())
+
+        # No belief supplied -> uniform reference.
+        uniform = select_baseline_probe(plan, [])
+        # A concentrated posterior must change the reported EIG...
+        priors = {code: 0.01 for code in DEFAULT_PRIORS}
+        priors[Hypothesis.DNS_FAILURE] = 0.91
+        concentrated = select_baseline_probe(plan, [], BeliefState(priors))
+
+        # ...but never the fixed order itself.
+        assert concentrated.probe_key == uniform.probe_key
+        assert concentrated.expected_information_gain != pytest.approx(
+            uniform.expected_information_gain
+        )
+
+

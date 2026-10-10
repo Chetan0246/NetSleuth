@@ -834,8 +834,12 @@ class LabSimulator:
 
         rtts, _ = self._rtt_samples(forward, f"tcp:{source}:{node.id}:{port}:{tag}", 1)
         rtt = rtts[0] if rtts else None
+        # A completed handshake has an RTT; a silently dropped SYN does not. The RNG
+        # sample above is still drawn so the packet-loss stream is unchanged.
+        handshake_rtt_ms = rtt
         if policy == "drop":
             outcome = TcpOutcome.TIMEOUT_DROP
+            handshake_rtt_ms = None
             detail = (
                 f"the SYN to {node.ip_address}:{port} received no answer before the simulated "
                 "timeout: the packet is dropped on the path (firewall DROP policy)"
@@ -877,7 +881,7 @@ class LabSimulator:
             destination_ip=node.ip_address,
             port=port,
             service_name=service.name if service else service_name,
-            handshake_rtt_ms=rtt,
+            handshake_rtt_ms=handshake_rtt_ms,
             port_policy=policy,
             forwarding=forward,
             simulated_timeout_ms=TCP_CONNECT_TIMEOUT_MS,

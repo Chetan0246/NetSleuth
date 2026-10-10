@@ -1,9 +1,10 @@
 /** Page 1 — Overview Dashboard. Every number is counted by the backend. */
 
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight, RefreshCw } from "lucide-react";
 
-import { api } from "../lib/api";
+import { api, ApiError } from "../lib/api";
 import { formatTime, pct, useAsync } from "../lib/useAsync";
 import { useSessionContext } from "../App";
 import {
@@ -22,11 +23,26 @@ export default function OverviewPage() {
   const { setSession } = useSessionContext();
   const overview = useAsync(() => api.overview(), []);
   const sessions = useAsync(() => api.listSessions(8), []);
+  const [openingId, setOpeningId] = useState<string | null>(null);
+  const [openError, setOpenError] = useState<ApiError | null>(null);
 
   const openSession = async (sessionId: string) => {
-    const full = await api.getSession(sessionId);
-    setSession(full);
-    navigate("/lab");
+    if (openingId) return;
+    setOpeningId(sessionId);
+    setOpenError(null);
+    try {
+      const full = await api.getSession(sessionId);
+      setSession(full);
+      navigate("/lab");
+    } catch (cause) {
+      setOpenError(
+        cause instanceof ApiError
+          ? cause
+          : new ApiError(0, "unknown_error", String(cause)),
+      );
+    } finally {
+      setOpeningId(null);
+    }
   };
 
   if (overview.loading) return <Loading label="Loading dashboard…" />;
@@ -103,6 +119,11 @@ export default function OverviewPage() {
             </Link>
           }
         >
+          {openError && (
+            <div className="mb-2">
+              <ErrorNotice error={openError} onRetry={() => setOpenError(null)} />
+            </div>
+          )}
           {sessions.loading ? (
             <Loading />
           ) : sessions.error ? (
@@ -116,8 +137,9 @@ export default function OverviewPage() {
                   <div className="min-w-0">
                     <button
                       type="button"
+                      disabled={openingId !== null}
                       onClick={() => void openSession(session.id)}
-                      className="truncate text-left text-sm font-medium text-sky-800 hover:underline"
+                      className="truncate text-left text-sm font-medium text-sky-800 hover:underline disabled:opacity-50"
                     >
                       {session.name}
                     </button>

@@ -1,5 +1,5 @@
 {
-  "experiment_id": "exp-e5952536f39f",
+  "experiment_id": "exp-3f1052b8f5df",
   "name": "NetSleuth fault suite (seed 20261009, 10 runs/scenario)",
   "config": {
     "runs_per_scenario": 10,
@@ -22,8 +22,8 @@
     "total_runs": 440
   },
   "completed_runs": 440,
-  "wall_clock_ms": 2528.383,
-  "generated_at": "2026-10-09T15:10:38.378216+00:00",
+  "wall_clock_ms": 2844.637,
+  "generated_at": "2026-10-10T11:37:34.599820+00:00",
   "metrics": {
     "config": {
       "runs_per_scenario": 10,
@@ -45,17 +45,17 @@
       "top1_correct": 376,
       "top3_correct": 440,
       "accepted_confusion_correct": 406,
-      "inconclusive_runs": 45,
+      "inconclusive_runs": 67,
       "top1_accuracy": 0.8545,
       "top3_accuracy": 1.0,
       "accepted_confusion_adjusted_accuracy": 0.9227,
-      "coverage": 0.8977,
-      "inconclusive_rate": 0.1023,
-      "mean_probes_all": 5.6,
-      "mean_probes_conclusive": 5.3266,
-      "mean_elapsed_ms": 3.6818,
-      "localization_accuracy": 0.9864,
-      "localization_evaluated": 294
+      "coverage": 0.8477,
+      "inconclusive_rate": 0.1523,
+      "mean_probes_all": 5.5045,
+      "mean_probes_conclusive": 5.2761,
+      "mean_elapsed_ms": 4.3778,
+      "localization_accuracy": 0.725,
+      "localization_evaluated": 400
     },
     "by_strategy": {
       "adaptive": {
@@ -71,26 +71,26 @@
         "inconclusive_rate": 0.0227,
         "mean_probes_all": 4.2045,
         "mean_probes_conclusive": 4.1163,
-        "mean_elapsed_ms": 4.9186,
-        "localization_accuracy": 0.9938,
-        "localization_evaluated": 161
+        "mean_elapsed_ms": 6.0522,
+        "localization_accuracy": 0.8,
+        "localization_evaluated": 200
       },
       "baseline": {
         "runs": 220,
         "top1_correct": 157,
         "top3_correct": 220,
         "accepted_confusion_correct": 187,
-        "inconclusive_runs": 40,
+        "inconclusive_runs": 62,
         "top1_accuracy": 0.7136,
         "top3_accuracy": 1.0,
         "accepted_confusion_adjusted_accuracy": 0.85,
-        "coverage": 0.8182,
-        "inconclusive_rate": 0.1818,
-        "mean_probes_all": 6.9955,
-        "mean_probes_conclusive": 6.7722,
-        "mean_elapsed_ms": 2.445,
-        "localization_accuracy": 0.9774,
-        "localization_evaluated": 133
+        "coverage": 0.7182,
+        "inconclusive_rate": 0.2818,
+        "mean_probes_all": 6.8045,
+        "mean_probes_conclusive": 6.8544,
+        "mean_elapsed_ms": 2.7034,
+        "localization_accuracy": 0.65,
+        "localization_evaluated": 200
       }
     },
     "by_fault_class": {
@@ -108,7 +108,7 @@
           "inconclusive_rate": 0.0,
           "mean_probes_all": 5.0,
           "mean_probes_conclusive": 5.0,
-          "mean_elapsed_ms": 2.6979,
+          "mean_elapsed_ms": 3.1994,
           "localization_accuracy": 1.0,
           "localization_evaluated": 40
         },
@@ -126,7 +126,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 2.0,
             "mean_probes_conclusive": 2.0,
-            "mean_elapsed_ms": 2.7664,
+            "mean_elapsed_ms": 3.3276,
             "localization_accuracy": 1.0,
             "localization_evaluated": 20
           },
@@ -143,7 +143,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 8.0,
             "mean_probes_conclusive": 8.0,
-            "mean_elapsed_ms": 2.6294,
+            "mean_elapsed_ms": 3.0711,
             "localization_accuracy": 1.0,
             "localization_evaluated": 20
           }
@@ -155,15 +155,15 @@
           "top1_correct": 40,
           "top3_correct": 40,
           "accepted_confusion_correct": 40,
-          "inconclusive_runs": 0,
+          "inconclusive_runs": 20,
           "top1_accuracy": 1.0,
           "top3_accuracy": 1.0,
           "accepted_confusion_adjusted_accuracy": 1.0,
-          "coverage": 1.0,
-          "inconclusive_rate": 0.0,
-          "mean_probes_all": 5.0,
-          "mean_probes_conclusive": 5.0,
-          "mean_elapsed_ms": 3.2969,
+          "coverage": 0.5,
+          "inconclusive_rate": 0.5,
+          "mean_probes_all": 4.0,
+          "mean_probes_conclusive": 4.0,
+          "mean_elapsed_ms": 3.7152,
           "localization_accuracy": 1.0,
           "localization_evaluated": 40
         },
@@ -181,7 +181,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 4.0,
             "mean_probes_conclusive": 4.0,
-            "mean_elapsed_ms": 4.6156,
+            "mean_elapsed_ms": 5.8511,
             "localization_accuracy": 1.0,
             "localization_evaluated": 20
           },
@@ -190,15 +190,15 @@
             "top1_correct": 20,
             "top3_correct": 20,
             "accepted_confusion_correct": 20,
-            "inconclusive_runs": 0,
+            "inconclusive_runs": 20,
             "top1_accuracy": 1.0,
             "top3_accuracy": 1.0,
             "accepted_confusion_adjusted_accuracy": 1.0,
-            "coverage": 1.0,
-            "inconclusive_rate": 0.0,
-            "mean_probes_all": 6.0,
-            "mean_probes_conclusive": 6.0,
-            "mean_elapsed_ms": 1.9781,
+            "coverage": 0.0,
+            "inconclusive_rate": 1.0,
+            "mean_probes_all": 4.0,
+            "mean_probes_conclusive": null,
+            "mean_elapsed_ms": 1.5792,
             "localization_accuracy": 1.0,
             "localization_evaluated": 20
           }
@@ -218,9 +218,9 @@
           "inconclusive_rate": 0.0,
           "mean_probes_all": 6.0,
           "mean_probes_conclusive": 6.0,
-          "mean_elapsed_ms": 4.0631,
-          "localization_accuracy": null,
-          "localization_evaluated": 0
+          "mean_elapsed_ms": 4.7717,
+          "localization_accuracy": 0.0,
+          "localization_evaluated": 40
         },
         "by_strategy": {
           "adaptive": {
@@ -236,9 +236,9 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 5.0,
             "mean_probes_conclusive": 5.0,
-            "mean_elapsed_ms": 5.6096,
-            "localization_accuracy": null,
-            "localization_evaluated": 0
+            "mean_elapsed_ms": 6.8545,
+            "localization_accuracy": 0.0,
+            "localization_evaluated": 20
           },
           "baseline": {
             "runs": 20,
@@ -253,9 +253,9 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 7.0,
             "mean_probes_conclusive": 7.0,
-            "mean_elapsed_ms": 2.5165,
-            "localization_accuracy": null,
-            "localization_evaluated": 0
+            "mean_elapsed_ms": 2.6889,
+            "localization_accuracy": 0.0,
+            "localization_evaluated": 20
           }
         }
       },
@@ -273,7 +273,7 @@
           "inconclusive_rate": 0.375,
           "mean_probes_all": 5.625,
           "mean_probes_conclusive": 4.2,
-          "mean_elapsed_ms": 3.9687,
+          "mean_elapsed_ms": 4.8194,
           "localization_accuracy": 1.0,
           "localization_evaluated": 80
         },
@@ -291,7 +291,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 4.5,
             "mean_probes_conclusive": 4.5,
-            "mean_elapsed_ms": 5.4399,
+            "mean_elapsed_ms": 6.6212,
             "localization_accuracy": 1.0,
             "localization_evaluated": 40
           },
@@ -308,7 +308,7 @@
             "inconclusive_rate": 0.75,
             "mean_probes_all": 6.75,
             "mean_probes_conclusive": 3.0,
-            "mean_elapsed_ms": 2.4974,
+            "mean_elapsed_ms": 3.0176,
             "localization_accuracy": 1.0,
             "localization_evaluated": 40
           }
@@ -328,9 +328,9 @@
           "inconclusive_rate": 0.0,
           "mean_probes_all": 5.0,
           "mean_probes_conclusive": 5.0,
-          "mean_elapsed_ms": 3.5111,
-          "localization_accuracy": 1.0,
-          "localization_evaluated": 30
+          "mean_elapsed_ms": 4.2259,
+          "localization_accuracy": 0.5,
+          "localization_evaluated": 60
         },
         "by_strategy": {
           "adaptive": {
@@ -346,7 +346,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 4.0,
             "mean_probes_conclusive": 4.0,
-            "mean_elapsed_ms": 4.8691,
+            "mean_elapsed_ms": 6.1085,
             "localization_accuracy": 1.0,
             "localization_evaluated": 30
           },
@@ -363,9 +363,9 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 6.0,
             "mean_probes_conclusive": 6.0,
-            "mean_elapsed_ms": 2.153,
-            "localization_accuracy": null,
-            "localization_evaluated": 0
+            "mean_elapsed_ms": 2.3433,
+            "localization_accuracy": 0.0,
+            "localization_evaluated": 30
           }
         }
       },
@@ -383,7 +383,7 @@
           "inconclusive_rate": 0.0,
           "mean_probes_all": 5.0,
           "mean_probes_conclusive": 5.0,
-          "mean_elapsed_ms": 3.4165,
+          "mean_elapsed_ms": 4.1063,
           "localization_accuracy": null,
           "localization_evaluated": 0
         },
@@ -401,7 +401,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 4.0,
             "mean_probes_conclusive": 4.0,
-            "mean_elapsed_ms": 4.7744,
+            "mean_elapsed_ms": 5.9197,
             "localization_accuracy": null,
             "localization_evaluated": 0
           },
@@ -418,7 +418,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 6.0,
             "mean_probes_conclusive": 6.0,
-            "mean_elapsed_ms": 2.0586,
+            "mean_elapsed_ms": 2.293,
             "localization_accuracy": null,
             "localization_evaluated": 0
           }
@@ -430,17 +430,17 @@
           "top1_correct": 36,
           "top3_correct": 40,
           "accepted_confusion_correct": 36,
-          "inconclusive_runs": 15,
+          "inconclusive_runs": 17,
           "top1_accuracy": 0.9,
           "top3_accuracy": 1.0,
           "accepted_confusion_adjusted_accuracy": 0.9,
-          "coverage": 0.625,
-          "inconclusive_rate": 0.375,
-          "mean_probes_all": 7.1,
-          "mean_probes_conclusive": 6.56,
-          "mean_elapsed_ms": 4.6838,
+          "coverage": 0.575,
+          "inconclusive_rate": 0.425,
+          "mean_probes_all": 7.05,
+          "mean_probes_conclusive": 6.4348,
+          "mean_elapsed_ms": 5.4215,
           "localization_accuracy": 0.0,
-          "localization_evaluated": 4
+          "localization_evaluated": 40
         },
         "by_strategy": {
           "adaptive": {
@@ -456,26 +456,26 @@
             "inconclusive_rate": 0.25,
             "mean_probes_all": 6.25,
             "mean_probes_conclusive": 5.6667,
-            "mean_elapsed_ms": 6.4185,
+            "mean_elapsed_ms": 7.8421,
             "localization_accuracy": 0.0,
-            "localization_evaluated": 1
+            "localization_evaluated": 20
           },
           "baseline": {
             "runs": 20,
             "top1_correct": 17,
             "top3_correct": 20,
             "accepted_confusion_correct": 17,
-            "inconclusive_runs": 10,
+            "inconclusive_runs": 12,
             "top1_accuracy": 0.85,
             "top3_accuracy": 1.0,
             "accepted_confusion_adjusted_accuracy": 0.85,
-            "coverage": 0.5,
-            "inconclusive_rate": 0.5,
-            "mean_probes_all": 7.95,
-            "mean_probes_conclusive": 7.9,
-            "mean_elapsed_ms": 2.949,
+            "coverage": 0.4,
+            "inconclusive_rate": 0.6,
+            "mean_probes_all": 7.85,
+            "mean_probes_conclusive": 7.875,
+            "mean_elapsed_ms": 3.0009,
             "localization_accuracy": 0.0,
-            "localization_evaluated": 3
+            "localization_evaluated": 20
           }
         }
       },
@@ -493,7 +493,7 @@
           "inconclusive_rate": 0.0,
           "mean_probes_all": 6.5,
           "mean_probes_conclusive": 6.5,
-          "mean_elapsed_ms": 4.1923,
+          "mean_elapsed_ms": 5.0376,
           "localization_accuracy": 1.0,
           "localization_evaluated": 40
         },
@@ -511,7 +511,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 5.0,
             "mean_probes_conclusive": 5.0,
-            "mean_elapsed_ms": 5.7814,
+            "mean_elapsed_ms": 6.9308,
             "localization_accuracy": 1.0,
             "localization_evaluated": 20
           },
@@ -528,7 +528,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 8.0,
             "mean_probes_conclusive": 8.0,
-            "mean_elapsed_ms": 2.6031,
+            "mean_elapsed_ms": 3.1444,
             "localization_accuracy": 1.0,
             "localization_evaluated": 20
           }
@@ -548,7 +548,7 @@
           "inconclusive_rate": 0.0,
           "mean_probes_all": 5.5,
           "mean_probes_conclusive": 5.5,
-          "mean_elapsed_ms": 3.2967,
+          "mean_elapsed_ms": 3.9512,
           "localization_accuracy": 1.0,
           "localization_evaluated": 60
         },
@@ -566,7 +566,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 3.3333,
             "mean_probes_conclusive": 3.3333,
-            "mean_elapsed_ms": 3.9698,
+            "mean_elapsed_ms": 4.9624,
             "localization_accuracy": 1.0,
             "localization_evaluated": 30
           },
@@ -583,7 +583,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 7.6667,
             "mean_probes_conclusive": 7.6667,
-            "mean_elapsed_ms": 2.6237,
+            "mean_elapsed_ms": 2.94,
             "localization_accuracy": 1.0,
             "localization_evaluated": 30
           }
@@ -737,7 +737,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 4.0,
             "mean_probes_conclusive": 4.0,
-            "mean_elapsed_ms": 4.7843,
+            "mean_elapsed_ms": 5.9245,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           },
@@ -746,15 +746,15 @@
             "top1_correct": 10,
             "top3_correct": 10,
             "accepted_confusion_correct": 10,
-            "inconclusive_runs": 0,
+            "inconclusive_runs": 10,
             "top1_accuracy": 1.0,
             "top3_accuracy": 1.0,
             "accepted_confusion_adjusted_accuracy": 1.0,
-            "coverage": 1.0,
-            "inconclusive_rate": 0.0,
-            "mean_probes_all": 6.0,
-            "mean_probes_conclusive": 6.0,
-            "mean_elapsed_ms": 1.9485,
+            "coverage": 0.0,
+            "inconclusive_rate": 1.0,
+            "mean_probes_all": 4.0,
+            "mean_probes_conclusive": null,
+            "mean_elapsed_ms": 1.543,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           }
@@ -792,7 +792,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 3.0,
             "mean_probes_conclusive": 3.0,
-            "mean_elapsed_ms": 3.924,
+            "mean_elapsed_ms": 4.7294,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           },
@@ -809,7 +809,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 3.0,
             "mean_probes_conclusive": 3.0,
-            "mean_elapsed_ms": 1.1922,
+            "mean_elapsed_ms": 1.3336,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           }
@@ -847,9 +847,9 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 5.0,
             "mean_probes_conclusive": 5.0,
-            "mean_elapsed_ms": 5.724,
-            "localization_accuracy": null,
-            "localization_evaluated": 0
+            "mean_elapsed_ms": 6.8596,
+            "localization_accuracy": 0.0,
+            "localization_evaluated": 10
           },
           "baseline": {
             "runs": 10,
@@ -864,9 +864,9 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 7.0,
             "mean_probes_conclusive": 7.0,
-            "mean_elapsed_ms": 2.5911,
-            "localization_accuracy": null,
-            "localization_evaluated": 0
+            "mean_elapsed_ms": 2.7427,
+            "localization_accuracy": 0.0,
+            "localization_evaluated": 10
           }
         }
       },
@@ -902,7 +902,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 5.0,
             "mean_probes_conclusive": 5.0,
-            "mean_elapsed_ms": 5.5387,
+            "mean_elapsed_ms": 7.368,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           },
@@ -919,7 +919,7 @@
             "inconclusive_rate": 1.0,
             "mean_probes_all": 8.0,
             "mean_probes_conclusive": null,
-            "mean_elapsed_ms": 2.9403,
+            "mean_elapsed_ms": 3.6512,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           }
@@ -957,7 +957,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 5.0,
             "mean_probes_conclusive": 5.0,
-            "mean_elapsed_ms": 6.0844,
+            "mean_elapsed_ms": 7.2426,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           },
@@ -974,7 +974,7 @@
             "inconclusive_rate": 1.0,
             "mean_probes_all": 8.0,
             "mean_probes_conclusive": null,
-            "mean_elapsed_ms": 2.859,
+            "mean_elapsed_ms": 3.6782,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           }
@@ -1012,7 +1012,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 4.0,
             "mean_probes_conclusive": 4.0,
-            "mean_elapsed_ms": 5.0224,
+            "mean_elapsed_ms": 5.9592,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           },
@@ -1029,9 +1029,9 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 6.0,
             "mean_probes_conclusive": 6.0,
-            "mean_elapsed_ms": 2.4089,
-            "localization_accuracy": null,
-            "localization_evaluated": 0
+            "mean_elapsed_ms": 2.4659,
+            "localization_accuracy": 0.0,
+            "localization_evaluated": 10
           }
         }
       },
@@ -1067,7 +1067,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 4.0,
             "mean_probes_conclusive": 4.0,
-            "mean_elapsed_ms": 4.9319,
+            "mean_elapsed_ms": 6.2704,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           },
@@ -1084,9 +1084,9 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 6.0,
             "mean_probes_conclusive": 6.0,
-            "mean_elapsed_ms": 2.068,
-            "localization_accuracy": null,
-            "localization_evaluated": 0
+            "mean_elapsed_ms": 2.3142,
+            "localization_accuracy": 0.0,
+            "localization_evaluated": 10
           }
         }
       },
@@ -1122,7 +1122,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 4.0,
             "mean_probes_conclusive": 4.0,
-            "mean_elapsed_ms": 5.0075,
+            "mean_elapsed_ms": 5.9598,
             "localization_accuracy": null,
             "localization_evaluated": 0
           },
@@ -1139,7 +1139,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 6.0,
             "mean_probes_conclusive": 6.0,
-            "mean_elapsed_ms": 1.9682,
+            "mean_elapsed_ms": 2.3233,
             "localization_accuracy": null,
             "localization_evaluated": 0
           }
@@ -1177,26 +1177,26 @@
             "inconclusive_rate": 0.5,
             "mean_probes_all": 6.7,
             "mean_probes_conclusive": 5.4,
-            "mean_elapsed_ms": 6.6374,
+            "mean_elapsed_ms": 8.038,
             "localization_accuracy": 0.0,
-            "localization_evaluated": 1
+            "localization_evaluated": 10
           },
           "baseline": {
             "runs": 10,
             "top1_correct": 7,
             "top3_correct": 10,
             "accepted_confusion_correct": 7,
-            "inconclusive_runs": 6,
+            "inconclusive_runs": 8,
             "top1_accuracy": 0.7,
             "top3_accuracy": 1.0,
             "accepted_confusion_adjusted_accuracy": 0.7,
-            "coverage": 0.4,
-            "inconclusive_rate": 0.6,
-            "mean_probes_all": 7.9,
-            "mean_probes_conclusive": 7.75,
-            "mean_elapsed_ms": 2.7008,
+            "coverage": 0.2,
+            "inconclusive_rate": 0.8,
+            "mean_probes_all": 7.7,
+            "mean_probes_conclusive": 7.5,
+            "mean_elapsed_ms": 2.9468,
             "localization_accuracy": 0.0,
-            "localization_evaluated": 3
+            "localization_evaluated": 10
           }
         }
       },
@@ -1232,9 +1232,9 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 5.8,
             "mean_probes_conclusive": 5.8,
-            "mean_elapsed_ms": 6.1997,
-            "localization_accuracy": null,
-            "localization_evaluated": 0
+            "mean_elapsed_ms": 7.6462,
+            "localization_accuracy": 0.0,
+            "localization_evaluated": 10
           },
           "baseline": {
             "runs": 10,
@@ -1249,9 +1249,9 @@
             "inconclusive_rate": 0.4,
             "mean_probes_all": 8.0,
             "mean_probes_conclusive": 8.0,
-            "mean_elapsed_ms": 3.1973,
-            "localization_accuracy": null,
-            "localization_evaluated": 0
+            "mean_elapsed_ms": 3.0551,
+            "localization_accuracy": 0.0,
+            "localization_evaluated": 10
           }
         }
       },
@@ -1287,7 +1287,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 4.0,
             "mean_probes_conclusive": 4.0,
-            "mean_elapsed_ms": 4.7092,
+            "mean_elapsed_ms": 5.7738,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           },
@@ -1304,7 +1304,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 8.0,
             "mean_probes_conclusive": 8.0,
-            "mean_elapsed_ms": 2.6241,
+            "mean_elapsed_ms": 3.102,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           }
@@ -1342,7 +1342,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 2.0,
             "mean_probes_conclusive": 2.0,
-            "mean_elapsed_ms": 2.7058,
+            "mean_elapsed_ms": 3.3888,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           },
@@ -1359,7 +1359,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 7.0,
             "mean_probes_conclusive": 7.0,
-            "mean_elapsed_ms": 2.528,
+            "mean_elapsed_ms": 2.7726,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           }
@@ -1397,7 +1397,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 5.0,
             "mean_probes_conclusive": 5.0,
-            "mean_elapsed_ms": 5.4239,
+            "mean_elapsed_ms": 6.9528,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           },
@@ -1414,7 +1414,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 8.0,
             "mean_probes_conclusive": 8.0,
-            "mean_elapsed_ms": 2.5494,
+            "mean_elapsed_ms": 3.2079,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           }
@@ -1452,7 +1452,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 2.0,
             "mean_probes_conclusive": 2.0,
-            "mean_elapsed_ms": 2.6681,
+            "mean_elapsed_ms": 3.3089,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           },
@@ -1469,7 +1469,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 8.0,
             "mean_probes_conclusive": 8.0,
-            "mean_elapsed_ms": 2.8009,
+            "mean_elapsed_ms": 3.1821,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           }
@@ -1507,7 +1507,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 4.0,
             "mean_probes_conclusive": 4.0,
-            "mean_elapsed_ms": 4.447,
+            "mean_elapsed_ms": 5.7776,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           },
@@ -1516,15 +1516,15 @@
             "top1_correct": 10,
             "top3_correct": 10,
             "accepted_confusion_correct": 10,
-            "inconclusive_runs": 0,
+            "inconclusive_runs": 10,
             "top1_accuracy": 1.0,
             "top3_accuracy": 1.0,
             "accepted_confusion_adjusted_accuracy": 1.0,
-            "coverage": 1.0,
-            "inconclusive_rate": 0.0,
-            "mean_probes_all": 6.0,
-            "mean_probes_conclusive": 6.0,
-            "mean_elapsed_ms": 2.0076,
+            "coverage": 0.0,
+            "inconclusive_rate": 1.0,
+            "mean_probes_all": 4.0,
+            "mean_probes_conclusive": null,
+            "mean_elapsed_ms": 1.6155,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           }
@@ -1562,9 +1562,9 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 5.0,
             "mean_probes_conclusive": 5.0,
-            "mean_elapsed_ms": 5.4953,
-            "localization_accuracy": null,
-            "localization_evaluated": 0
+            "mean_elapsed_ms": 6.8495,
+            "localization_accuracy": 0.0,
+            "localization_evaluated": 10
           },
           "baseline": {
             "runs": 10,
@@ -1579,9 +1579,9 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 7.0,
             "mean_probes_conclusive": 7.0,
-            "mean_elapsed_ms": 2.4419,
-            "localization_accuracy": null,
-            "localization_evaluated": 0
+            "mean_elapsed_ms": 2.635,
+            "localization_accuracy": 0.0,
+            "localization_evaluated": 10
           }
         }
       },
@@ -1617,7 +1617,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 5.0,
             "mean_probes_conclusive": 5.0,
-            "mean_elapsed_ms": 6.2125,
+            "mean_elapsed_ms": 7.1448,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           },
@@ -1634,7 +1634,7 @@
             "inconclusive_rate": 1.0,
             "mean_probes_all": 8.0,
             "mean_probes_conclusive": null,
-            "mean_elapsed_ms": 2.9982,
+            "mean_elapsed_ms": 3.4076,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           }
@@ -1672,7 +1672,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 4.0,
             "mean_probes_conclusive": 4.0,
-            "mean_elapsed_ms": 4.653,
+            "mean_elapsed_ms": 6.096,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           },
@@ -1689,9 +1689,9 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 6.0,
             "mean_probes_conclusive": 6.0,
-            "mean_elapsed_ms": 1.9822,
-            "localization_accuracy": null,
-            "localization_evaluated": 0
+            "mean_elapsed_ms": 2.2499,
+            "localization_accuracy": 0.0,
+            "localization_evaluated": 10
           }
         }
       },
@@ -1727,7 +1727,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 4.0,
             "mean_probes_conclusive": 4.0,
-            "mean_elapsed_ms": 4.5413,
+            "mean_elapsed_ms": 5.8796,
             "localization_accuracy": null,
             "localization_evaluated": 0
           },
@@ -1744,7 +1744,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 6.0,
             "mean_probes_conclusive": 6.0,
-            "mean_elapsed_ms": 2.1489,
+            "mean_elapsed_ms": 2.2627,
             "localization_accuracy": null,
             "localization_evaluated": 0
           }
@@ -1782,7 +1782,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 4.0,
             "mean_probes_conclusive": 4.0,
-            "mean_elapsed_ms": 4.4944,
+            "mean_elapsed_ms": 5.7247,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           },
@@ -1799,7 +1799,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 8.0,
             "mean_probes_conclusive": 8.0,
-            "mean_elapsed_ms": 2.7189,
+            "mean_elapsed_ms": 2.9455,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           }
@@ -1837,7 +1837,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 5.0,
             "mean_probes_conclusive": 5.0,
-            "mean_elapsed_ms": 6.1389,
+            "mean_elapsed_ms": 6.9088,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           },
@@ -1854,7 +1854,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 8.0,
             "mean_probes_conclusive": 8.0,
-            "mean_elapsed_ms": 2.6568,
+            "mean_elapsed_ms": 3.081,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           }
@@ -1892,7 +1892,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 2.0,
             "mean_probes_conclusive": 2.0,
-            "mean_elapsed_ms": 2.8648,
+            "mean_elapsed_ms": 3.3464,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           },
@@ -1909,7 +1909,7 @@
             "inconclusive_rate": 0.0,
             "mean_probes_all": 8.0,
             "mean_probes_conclusive": 8.0,
-            "mean_elapsed_ms": 2.4579,
+            "mean_elapsed_ms": 2.9601,
             "localization_accuracy": 1.0,
             "localization_evaluated": 10
           }
@@ -1941,7 +1941,7 @@
         "DNS_FAILURE": 10
       },
       "probe_counts": {
-        "6": 10
+        "4": 10
       }
     },
     "campus-gateway-unreachable|adaptive": {
@@ -2105,8 +2105,8 @@
         "MTU_BLACK_HOLE": 3
       },
       "probe_counts": {
-        "7": 1,
-        "8": 9
+        "7": 3,
+        "8": 7
       }
     },
     "campus-packet-loss-severe|adaptive": {
@@ -2227,7 +2227,7 @@
         "DNS_FAILURE": 10
       },
       "probe_counts": {
-        "6": 10
+        "4": 10
       }
     },
     "multihop-latency-wan|adaptive": {
@@ -2371,6 +2371,6 @@
       }
     }
   },
-  "database": "/home/chetan/NetSleuth/docs/experiments/evaluation-20261009-151035.sqlite3",
-  "python_wall_clock_s": 2.533
+  "database": "/home/chetan/NetSleuth/docs/experiments/evaluation-20261010-113731.sqlite3",
+  "python_wall_clock_s": 2.853
 }

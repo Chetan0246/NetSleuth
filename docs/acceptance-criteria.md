@@ -31,7 +31,7 @@ curl /api/v1/health /api/v1/lab/templates /api/v1/experiments/scenarios /api/v1/
 
 # 5. evaluation
 python3 scripts/run_evaluation.py --runs-per-scenario 10
-#    → 440 runs in 2.33 s
+#    → 440 runs in ~3 s
 ```
 
 ---

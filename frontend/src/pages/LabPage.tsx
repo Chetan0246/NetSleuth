@@ -28,6 +28,18 @@ import {
   ModeBadge,
 } from "../components/ui";
 
+/**
+ * Stable identity for one injectable fault option.
+ *
+ * ``fault_type|target_id`` is not unique: a route black hole is offered once per
+ * destination server on the same link, so those entries share both fields and the
+ * first match would be injected whichever option the user picked. The parameters
+ * (which carry the destination) are part of the identity.
+ */
+function faultOptionKey(item: AvailableFault): string {
+  return `${item.fault_type}|${item.target_id}|${JSON.stringify(item.parameters ?? {})}`;
+}
+
 export default function LabPage() {
   const { session, sessionId, setSession, refreshSession } = useSessionContext();
   const templates = useAsync(() => api.templates(), []);
@@ -44,11 +56,10 @@ export default function LabPage() {
   const [confirmReset, setConfirmReset] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
-  // Re-default the source/destination/service whenever a session loads or CHANGES,
-  // keyed on the session id. The previous version kept any existing value
-  // (`current || hosts[0]?.id`), so after loading a different topology the page held
-  // ids from the old one: the <select> matched no option, and the value could equal
-  // the source, which the backend rejects.
+  // Re-default the source/destination/service when a *different* session is loaded.
+  // The effect is keyed on the session id only: keying on the whole `session` object
+  // re-ran it on every fault mutation (inject/toggle/remove/reset all call
+  // `setSession`), silently clearing the user's current selections.
   useEffect(() => {
     if (!session) return;
     const hosts = session.topology.nodes.filter((node) => node.type === "host");
@@ -58,7 +69,8 @@ export default function LabPage() {
     setService(servers[0]?.services[0]?.name ?? "");
     setFaultChoice("");
     setSelectedNodeId(null);
-  }, [session, session?.id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session?.id]);
 
   const availableByType = useMemo<
     { type: string; items: AvailableFault[] }[]
@@ -119,7 +131,7 @@ export default function LabPage() {
   async function injectFault() {
     if (!sessionId || !faultChoice) return;
     const choice = session?.available_faults.find(
-      (item) => `${item.fault_type}|${item.target_id}` === faultChoice,
+      (item) => faultOptionKey(item) === faultChoice,
     );
     if (!choice) return;
     const updated: LabSession | null = await withBusy(
@@ -478,8 +490,8 @@ export default function LabPage() {
                       <optgroup key={group.type} label={group.type}>
                         {group.items.map((item) => (
                           <option
-                            key={`${item.fault_type}|${item.target_id}`}
-                            value={`${item.fault_type}|${item.target_id}`}
+                            key={faultOptionKey(item)}
+                            value={faultOptionKey(item)}
                           >
                             {item.target_label}
                           </option>
@@ -500,7 +512,7 @@ export default function LabPage() {
 
               {(() => {
                 const choice = session.available_faults.find(
-                  (item) => `${item.fault_type}|${item.target_id}` === faultChoice,
+                  (item) => faultOptionKey(item) === faultChoice,
                 );
                 if (!choice) return null;
                 return (
@@ -525,7 +537,8 @@ export default function LabPage() {
 
               <div className="mt-4">
                 <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-600">
-                  Active faults ({session.active_faults.length})
+                  Active faults (
+                  {session.active_faults.filter((fault) => fault.is_active).length})
                 </h3>
                 {session.active_faults.length === 0 ? (
                   <p className="mt-1 text-sm text-slate-600">

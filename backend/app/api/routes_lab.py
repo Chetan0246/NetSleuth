@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from fastapi import APIRouter, Depends, Query
 
-from .deps import get_database, get_sessions
+from .deps import get_database, get_diagnoses, get_sessions
 from ..models.schemas import (
     FaultListResponse,
     FaultRequest,
@@ -15,7 +15,7 @@ from ..models.schemas import (
     TemplateListResponse,
 )
 from ..storage.database import Database
-from ..storage.repository import SessionService, template_listing
+from ..storage.repository import DiagnosisService, SessionService, template_listing
 
 router = APIRouter(tags=["lab"])
 
@@ -103,6 +103,7 @@ def reset_session(
 def delete_session(
     session_id: str,
     sessions: SessionService = Depends(get_sessions),
+    diagnoses: DiagnosisService = Depends(get_diagnoses),
     database: Database = Depends(get_database),
 ) -> None:
     """Delete a session and everything stored under it.
@@ -114,4 +115,7 @@ def delete_session(
 
         raise NotFoundError(f"unknown session id: {session_id}", field="session_id")
     sessions._labs.pop(session_id, None)
+    # The rows cascade in SQLite, but the live run objects are held in memory and must
+    # be dropped too, or a deleted session's diagnoses would still be served.
+    diagnoses.forget_session(session_id)
     return None

@@ -78,26 +78,32 @@ def build_baseline_plan(context: DiagnosisContext) -> BaselinePlan:
     return BaselinePlan(ordered_keys=ordered, skipped=skipped)
 
 
-def select_baseline_probe(plan: BaselinePlan, executed_keys: list[str]) -> ProbeChoice | None:
+def select_baseline_probe(
+    plan: BaselinePlan,
+    executed_keys: list[str],
+    belief: BeliefState | None = None,
+) -> ProbeChoice | None:
     """Next probe in the fixed order, ignoring how informative it would be.
 
     This is deliberately *not* information-gain driven; that is the whole point of
     the baseline. The function still returns a :class:`ProbeChoice` with the EIG
     values filled in, so the UI and the experiment export can report what the
     baseline *would* have gained — but the choice itself never depends on them.
+    The EIG is computed from the *current* belief (falling back to a uniform
+    reference only when no belief is supplied) so the shared stopping rule sees the
+    same quantity for both strategies.
     """
     from ..lab.outcomes import ProbeType
     from .information_gain import expected_information_gain
     from .likelihoods import likelihood_table
 
+    reference = belief.probabilities if belief is not None else _uniform_belief_placeholder()
     for key in plan.ordered_keys:
         if key not in executed_keys:
             probe_type, selector = _split(key)
             gain = expected_information_gain(
                 key,
-                # Uniform reference distribution: the baseline is order-driven, so
-                # the numbers reported here are descriptive, not decision-making.
-                _uniform_belief_placeholder(),
+                reference,
                 likelihood_table(),
                 cost=PROBE_COSTS.get(probe_type, 1.0),
             )

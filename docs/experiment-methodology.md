@@ -88,7 +88,7 @@ the topology cannot support, recording each skip with a reason.
 | **Inconclusive rate** | runs that did not satisfy the stopping rule, ÷ runs |
 | **Mean probes to decision** | mean executed probes per run (all runs, and conclusive only) |
 | **Mean compute time** | mean *measured* wall-clock duration of the diagnosis computation — simulator time, not network latency |
-| **Fault localization accuracy** | for runs with an expected component, runs whose suspected component matched, ÷ runs with an expected component |
+| **Fault localization accuracy** | for runs with an expected component, runs whose suspected component matched, ÷ runs with an expected component. A run that ends inconclusive, or that names no component, counts as a **miss** — it is never dropped from the denominator |
 
 ### 2.5 Accepted confusions
 
@@ -110,30 +110,30 @@ a single accuracy number is less honest than one that names it.
 
 **Configuration:** seed `20261009`, 10 runs/scenario, probe budget 8, 22 scenarios × 2
 strategies × 10 runs = **440 runs**, model revision `netsleuth-likelihood-v1`, priors
-`netsleuth-priors-v1`. Measured suite wall-clock time: **2.33 s**.
+`netsleuth-priors-v1`. Measured suite wall-clock time: **2.84 s**.
 
 ### 3.1 Headline
 
 | Strategy | Runs | Top-1 | Top-3 | Top-1 incl. confusions | Mean probes | Coverage | Inconclusive | Mean compute ms | Localization |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| **adaptive** | 220 | **99.55%** | 100% | 99.55% | **4.20** | **97.7%** | **2.3%** | 4.51 | 99.4% (n=161) |
-| **baseline** | 220 | 71.36% | 100% | 85.00% | 6.99 | 81.8% | 18.2% | 2.13 | 97.7% (n=133) |
+| **adaptive** | 220 | **99.55%** | 100% | 99.55% | **4.20** | **97.7%** | **2.3%** | 6.05 | 80.0% (n=200) |
+| **baseline** | 220 | 71.36% | 100% | 85.00% | 6.80 | 71.8% | 28.2% | 2.70 | 65.0% (n=200) |
 
 The adaptive strategy reached a **28.2 percentage point** higher top-1 accuracy while
-using **2.79 fewer probes on average** (a 40% reduction) and reaching a decision in
-**97.7%** of runs instead of 81.8%.
+using **2.60 fewer probes on average** (a 38% reduction) and reaching a decision in
+**97.7%** of runs instead of 71.8%.
 
 ### 3.2 Per fault class
 
 | Expected cause | Adaptive top-1 | Baseline top-1 | Adaptive mean probes | Baseline mean probes |
 |---|---:|---:|---:|---:|
 | `APPLICATION_SERVICE_FAILURE` | 100% (20/20) | 100% (20/20) | 2.00 | 8.00 |
-| `DNS_FAILURE` | 100% (20/20) | 100% (20/20) | 4.00 | 6.00 |
+| `DNS_FAILURE` | 100% (20/20) | 100% (20/20) | 4.00 | 4.00 |
 | `HIGH_LATENCY` | 100% (20/20) | 100% (20/20) | 5.00 | 7.00 |
 | `LINK_FAILURE` | 100% (40/40) | **25%** (10/40) | 4.50 | 6.75 |
 | `MTU_BLACK_HOLE` | 100% (30/30) | **0%** (0/30) | 4.00 | 6.00 |
 | `NO_FAULT_DETECTED` (control) | 100% (20/20) | 100% (20/20) | 4.00 | 6.00 |
-| `PACKET_LOSS` | **95%** (19/20) | 85% (17/20) | 6.25 | 7.95 |
+| `PACKET_LOSS` | **95%** (19/20) | 85% (17/20) | 6.25 | 7.85 |
 | `ROUTING_FAILURE` | 100% (20/20) | 100% (20/20) | 5.00 | 8.00 |
 | `TCP_FILTER_OR_PORT_FAILURE` | 100% (30/30) | 100% (30/30) | 3.33 | 7.67 |
 
@@ -155,11 +155,22 @@ using **2.79 fewer probes on average** (a 40% reduction) and reaching a decision
 
 | Strategy | Evaluated runs | Correct component |
 |---|---:|---:|
-| adaptive | 161 | 99.4% |
-| baseline | 133 | 97.7% |
+| adaptive | 200 | 80.0% |
+| baseline | 200 | 65.0% |
 
-The denominator difference is itself informative: the baseline reached a conclusive
-decision fewer times, so fewer of its runs were eligible for a localization check.
+Every non-control scenario declares an expected component, so all 200 runs per strategy
+are evaluated: a run that ends inconclusive, or that returns no component at all, counts
+as a localization miss rather than being dropped. Both denominators are therefore equal
+and the two rates are directly comparable.
+
+The per-class and per-scenario records show where the misses are. The localizer names a
+component for hard, link-scoped failures (link down, route black hole, MTU black hole,
+gateway unreachable) and for DNS, service and port faults. It reports **no component**
+for `HIGH_LATENCY` and `PACKET_LOSS`, so those scenarios are counted as misses. The
+baseline's `MTU_BLACK_HOLE` localization is 0% for a different reason: its leading
+hypothesis is `NO_FAULT_DETECTED`, so the localizer has no component to name. The
+headline rate is therefore a localization rate over *all* component-scoped scenarios,
+not only the ones the localizer answers — which is the honest reading.
 
 ## 4. Honest interpretation
 
@@ -177,10 +188,10 @@ records, not asserted:
   *unpredictable* outcome distributions.
 - **The link failure (25% → 100%) has the same shape**, plus a second effect: 30 of
   the 40 baseline link-failure runs are classed as `ROUTING_FAILURE`, which is the
-  declared accepted confusion. The baseline's inconclusive rate on link-down
-  scenarios is 100% for both link-down scenarios — it never reached a decision at all
-  and the leading hypothesis at the budget limit was the equally-plausible routing
-  explanation.
+  declared accepted confusion. The baseline is inconclusive in all three link-down
+  scenarios — it never reached a decision there, and the leading hypothesis at the
+  budget limit was the equally-plausible routing explanation. (The fourth scenario in
+  the class, the gateway-unreachable one, it does resolve.)
 - **`PACKET_LOSS` (85% → 95%) is the hardest class for both**, and the adaptive
   strategy is inconclusive in 25% of its packet-loss runs. This is a genuine
   limitation, not a rounding artefact — see §4.3.
@@ -197,10 +208,10 @@ records, not asserted:
   given a seed, has no congestion, no route flaps and no ambiguity from partial
   observability of a multi-tenant network.
 - **No claim about wall-clock efficiency.** The adaptive strategy's mean compute time
-  (4.51 ms) is *higher* than the baseline's (2.13 ms) because the EIG computation
+  (6.05 ms) is *higher* than the baseline's (2.70 ms) because the EIG computation
   costs more than the probes it saves in a simulator where a simulated probe is
   nearly free. In a real network where each probe costs seconds to minutes of
-  round-trip time and operator attention, running 2.8 fewer probes would dominate the
+  round-trip time and operator attention, running 2.6 fewer probes would dominate the
   planning cost — but this evaluation cannot demonstrate that, and it does not try
   to. The relative probe *costs* in `PROBE_COSTS` are engineering weights, not
   measurements.

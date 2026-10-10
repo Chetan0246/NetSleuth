@@ -182,8 +182,8 @@ Show:
 | | adaptive | baseline |
 |---|---:|---:|
 | Top-1 | 99.6% | 71.4% |
-| Mean probes | 4.20 | 7.00 |
-| Coverage | 97.7% | 81.8% |
+| Mean probes | 4.20 | 6.80 |
+| Coverage | 97.7% | 71.8% |
 | Top-1 / MTU black hole | 100% | 0% |
 | Top-1 / link failure | 100% | 25% |
 
@@ -192,7 +192,7 @@ Then state the limits plainly:
 - the advantage is measured **inside this simulator**, and the likelihood model was
   written for the same protocol behaviour the lab implements, so model–model
   circularity applies;
-- the adaptive strategy's measured *compute* time is higher (4.5 ms vs 2.1 ms) because
+- the adaptive strategy's measured *compute* time is higher (6.1 ms vs 2.7 ms) because
   planning costs more than a simulated probe; the probe-count saving is the meaningful
   efficiency claim here, and in a real network probe cost would dominate — but this
   evaluation cannot demonstrate that;

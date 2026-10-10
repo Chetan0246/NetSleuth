@@ -52,8 +52,10 @@ async function request<T>(
   let response: Response;
   try {
     response = await fetch(`${BASE}${path}`, {
-      headers: { "Content-Type": "application/json", ...(init.headers ?? {}) },
+      // `init` first, then the merged headers, so a caller-supplied `init.headers`
+      // is combined with Content-Type instead of clobbering it.
       ...init,
+      headers: { "Content-Type": "application/json", ...(init.headers ?? {}) },
     });
   } catch (cause) {
     throw new ApiError(
@@ -525,6 +527,21 @@ export interface ExperimentSummary {
   metrics: ExperimentMetrics;
 }
 
+/** Shape returned by GET /experiments/{id}: a stored experiment, not a run result. */
+export interface ExperimentDetail {
+  id: string;
+  name: string;
+  status: string;
+  config: Record<string, any>;
+  total_runs: number;
+  completed_runs: number;
+  stored_run_records: number;
+  metrics: ExperimentMetrics | null;
+  variation: Record<string, any>;
+  created_at: string;
+  completed_at: string | null;
+}
+
 export interface Overview {
   stats: {
     sessions: number;
@@ -651,9 +668,7 @@ export const api = {
   listExperiments: () =>
     request<{ experiments: any[]; total: number }>("/experiments"),
   getExperiment: (experimentId: string) =>
-    request<ExperimentSummary & { stored_run_records: number; variation: any }>(
-      `/experiments/${experimentId}`,
-    ),
+    request<ExperimentDetail>(`/experiments/${experimentId}`),
   experimentExportUrl: (experimentId: string, format: "json" | "csv" | "markdown") =>
     `${BASE}/experiments/${experimentId}/export?format=${format}`,
 };

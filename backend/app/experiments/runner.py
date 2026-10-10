@@ -215,8 +215,12 @@ def _execute_one(
     # accepted `edge`. The localizer emits a canonical id (link id, node id, or
     # `node:port`), and the scenario declares the same form, so equality is the
     # correct test.
+    # A scenario that declares an expected component is *always* evaluated: when the
+    # localizer returns no component at all that is a localization miss, not an
+    # ineligible run. Requiring ``localization.component_id`` here silently dropped
+    # exactly the failures from the denominator and inflated the reported accuracy.
     is_localization_correct: bool | None = None
-    if scenario.expected_component_id and localization.component_id:
+    if scenario.expected_component_id:
         is_localization_correct = localized_id == scenario.expected_component_id
 
     record = {

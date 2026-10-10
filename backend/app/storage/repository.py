@@ -486,6 +486,21 @@ class DiagnosisService:
         """Summaries across every session, newest first."""
         return [self._summary(row) for row in self.db.list_diagnoses(limit=limit)]
 
+    def forget_session(self, session_id: str) -> None:
+        """Drop the in-memory runs of a session that has been deleted.
+
+        The database rows cascade on delete, but the live ``DiagnosisRun`` objects do
+        not, so without this a deleted session's diagnoses would keep being served
+        from memory.
+        """
+        stale = [
+            diagnosis_id
+            for diagnosis_id, run in self._runs.items()
+            if run.session_id == session_id
+        ]
+        for diagnosis_id in stale:
+            del self._runs[diagnosis_id]
+
     def _summary(self, row: dict[str, Any]) -> dict[str, Any]:
         """One list entry for a stored diagnosis.
 

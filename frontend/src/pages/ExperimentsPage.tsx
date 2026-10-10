@@ -204,7 +204,9 @@ export default function ExperimentsPage() {
               </label>
 
               <fieldset>
-                <legend className="text-xs font-medium text-slate-700">Templates</legend>
+                <legend className="text-xs font-medium text-slate-700">
+                  Templates (none selected = all)
+                </legend>
                 <div className="mt-1 space-y-1">
                   {templates.map((templateId) => (
                     <label key={templateId} className="flex items-center gap-2 text-xs">
