@@ -13,13 +13,13 @@ Recorded on the last verification pass of this implementation.
 ```bash
 # 1. backend tests
 cd backend && python3 -m pytest -q
-#    → 466 collected, 0 failed, 0 errors
-#      (348 unit + 50 integration + 68 API)
+#    → 477 collected, 0 failed, 0 errors
+#      (359 unit + 50 integration + 68 API)
 
 # 2. frontend type check, tests and production build
 cd frontend && npx tsc --noEmit            # → clean
 cd frontend && npx vitest run              # → 17 passed (1 file)
-cd frontend && npm run build               # → built in 2.2 s
+cd frontend && npm run build               # → succeeds (644 kB / 182 kB gzipped)
 
 # 3. end-to-end smoke test against a real uvicorn server
 python3 scripts/smoke_test.py              # → 38/38 checks passed
@@ -156,7 +156,7 @@ measured wall-clock time are asserted to come from the payload.
 
 ### ✅ Unit, integration, and API tests pass
 
-466 tests, 0 failures, 0 errors. Plus 17 frontend tests and 38 smoke checks.
+477 tests, 0 failures, 0 errors. Plus 17 frontend tests and 38 smoke checks.
 
 ### ✅ Core type/schema validation is in place
 
@@ -239,14 +239,26 @@ interpretation including what the results do *not* support, the weakest class
 threats-to-validity table. `docs/experiments/latest.{json,csv,md}` hold the raw
 generated artefacts.
 
-### ⚠️ Screenshots come from the working application — NOT MET
+### ✅ Screenshots come from the working application
 
-No screenshots are committed. This environment could not capture a browser
-screenshot, and fabricating one would be dishonest. The gap is recorded in
-`docs/limitations.md` §5. What exists instead: the frontend tests assert the rendered
-content of every page from mocked API payloads, and `docs/demo-script.md` describes
-exactly what each page displays so screenshots can be captured in a few minutes by
-running the demo.
+Five screenshots captured from the running application are committed under
+`docs/screenshots/`:
+
+| File | Shows |
+|---|---|
+| `01-network-topology.png` | Lab page: template selector and the rendered topology (nodes, links, legend) |
+| `02-fault-injection.png` | Lab page: fault-injection form with the active-fault list (route black hole) |
+| `03-adaptive-diagnostic-timeline.png` | Workbench: a confident `ROUTING_FAILURE` diagnosis with the adaptive probe timeline |
+| `04-final-explanation.png` | Report page: conclusion, hypothesis ranking, evidence lists and remediation |
+| `05-experiment-comparison.png` | Experiment Studio: adaptive vs baseline metrics and charts |
+
+They are produced reproducibly by `scripts/capture_screenshots.py`, which drives the
+live backend and frontend with headless Chromium (Playwright) and removes the session
+it creates on exit. Re-run with both servers up:
+
+```bash
+python3 scripts/capture_screenshots.py
+```
 
 ### ✅ A 3–5 minute demo script is provided
 
@@ -278,7 +290,7 @@ discrepancy is stated rather than hidden behind the citation.
 | A fixed-order baseline for comparison | ✅ same implementations, same stopping rule |
 | Interactive web dashboard (topology, timeline, diagnosis, evaluation) | ✅ five pages |
 | Persistent scenario/experiment history in SQLite | ✅ seven tables |
-| Automated unit, integration and API tests | ✅ 466 backend + 17 frontend tests |
+| Automated unit, integration and API tests | ✅ 477 backend + 17 frontend tests |
 | Documentation, report export, working demo script | ✅ 8 docs, MD/JSON report export, demo script |
 
 ## Optional enhancements (plan.md §4) — not attempted
@@ -303,15 +315,17 @@ such rather than stubbed.
 |---|---|
 | Functionality criteria | **14 / 14 met** |
 | Quality criteria | **7 / 7 met** |
-| Academic deliverables | **6 / 7 met** (screenshots missing, recorded) |
+| Academic deliverables | **7 / 7 met** |
 | Required core scope | **12 / 12 complete** |
 | Optional enhancements | **0 / 5** (deliberately, per the plan's priority) |
-| Backend tests | **466 passed, 0 failed, 0 errors** |
+| Backend tests | **477 passed, 0 failed, 0 errors** |
 | Frontend tests | **17 passed** |
 | Smoke test | **38 / 38 checks passed** |
 | Frontend build | **succeeds** (644 kB / 182 kB gzipped) |
-| Recorded evaluation | **440 runs**; adaptive top-1 **99.6%** at **4.20** probes vs baseline **71.4%** at **7.00** |
+| Recorded evaluation | **440 runs**; adaptive top-1 **99.6%** at **4.20** probes vs baseline **71.4%** at **6.80** |
 
-The one unmet deliverable is the screenshot set, which requires a browser this
-environment does not provide. Everything else in §18 is met, and the incomplete items
-are listed in `docs/limitations.md` rather than left implicit.
+Every item in §18 is met. The screenshots are captured from the running application
+and committed under `docs/screenshots/`. The remaining honest caveats — the single-fault
+likelihood calibration, the localization misses on latency/loss classes, and the
+unimplemented optional features — are listed in `docs/limitations.md` rather than left
+implicit.

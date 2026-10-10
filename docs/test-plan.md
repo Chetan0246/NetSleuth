@@ -6,7 +6,7 @@ is tested, at which layer, and which plan requirement each group covers.
 > Counts in this document are the actual counts of the last recorded run of the
 > suite. Re-run and compare:
 > ```bash
-> cd backend && python3 -m pytest -q      # backend: 466 tests
+> cd backend && python3 -m pytest -q      # backend: 477 tests
 > cd frontend && npm run test             # frontend: 17 tests
 > python3 scripts/smoke_test.py           # end to end: 38 checks
 > ```
